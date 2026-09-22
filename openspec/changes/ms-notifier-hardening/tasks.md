@@ -51,7 +51,7 @@
 
 ## 7. Grupo F — Contenido del email
 
-- [ ] 7.1 Cambiar el saludo a neutro profesional (sin el correo del destinatario como nombre), eliminar la coma extra y renombrar el adjunto a `Checklist-27-puntos-SALAZAR-Eng.pdf`; verificar con los tests de 6.5.
+- [x] 7.1 Cambiar el saludo a neutro profesional (sin el correo del destinatario como nombre), eliminar la coma extra y renombrar el adjunto a `Checklist-27-puntos-SALAZAR-Eng.pdf`; verificar con los tests de 6.5.
 
 ## 8. Verificación final (criterios de aceptación del change)
 

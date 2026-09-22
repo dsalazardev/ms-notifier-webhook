@@ -15,7 +15,9 @@ def build_lead_message(to_email: str, need: str, pdf_bytes: bytes) -> dict:
         "recipients": {"to": [{"address": to_email}]},
         "content": {
             "subject": "Aquí tienes tu documento y el siguiente paso",
-            "plainText": f"""Hola {to_email} solicitaste información sobre {need}.,
+            "plainText": f"""Hola,
+
+Solicitaste información sobre {need}.
 
 Gracias por tu interés. Adjunto encontrarás el PDF que solicitaste.
 
@@ -28,7 +30,7 @@ Quedo atento.
         },
         "attachments": [
             {
-                "name": "Documento_Especial.pdf",
+                    "name": "Checklist-27-puntos-SALAZAR-Eng.pdf",
                 "contentType": "application/pdf",
                 "contentInBase64": base64.b64encode(pdf_bytes).decode("utf-8"),
             }
