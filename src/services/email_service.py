@@ -22,7 +22,7 @@ Gracias por tu interés. Adjunto encontrarás el PDF que solicitaste.
 
 Me encantaría que nos reuniéramos para discutir cómo podemos ayudarte a implementar esto. 
 Por favor, elige el horario que mejor se adapte a ti en el siguiente enlace:
-{settings.CALENDLY_URL}
+{settings.BOOKING_URL}
 
 Quedo atento.
 """

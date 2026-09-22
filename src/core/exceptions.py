@@ -7,5 +7,5 @@ class DriveDownloadError(NotificationServiceError):
     pass
 
 class EmailDeliveryError(NotificationServiceError):
-    """Lanzada cuando el servidor SMTP rechaza o falla al enviar el correo."""
+    """Lanzada cuando el servidor rechaza o falla al enviar el correo."""
     pass
