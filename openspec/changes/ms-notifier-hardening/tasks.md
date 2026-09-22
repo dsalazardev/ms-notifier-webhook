@@ -55,7 +55,7 @@
 
 ## 8. Verificación final (criterios de aceptación del change)
 
-- [ ] 8.1 Verificar `uv lock --check` (exit 0) y `uv run python -c "from src.main import app"` sin error.
-- [ ] 8.2 Verificar `uv run ruff check .`, `uv run ruff format --check .` limpios y `uv run pytest -q` verde sin acceso a red externa.
-- [ ] 8.3 Verificar imagen Docker (si disponible): proceso no-root, healthcheck healthy y `GET /api/v1/health/ready` con 200 en configuración válida.
-- [ ] 8.4 Repasar los 10 criterios de aceptación del brief contra specs y tests; registrar desviaciones en el reporte del apply.
+- [x] 8.1 Verificar `uv lock --check` (exit 0) y `uv run python -c "from src.main import app"` sin error.
+- [x] 8.2 Verificar `uv run ruff check .`, `uv run ruff format --check .` limpios y `uv run pytest -q` verde sin acceso a red externa.
+- [x] 8.3 Verificar imagen Docker (si disponible): proceso no-root, healthcheck healthy y `GET /api/v1/health/ready` con 200 en configuración válida.
+- [x] 8.4 Repasar los 10 criterios de aceptación del brief contra specs y tests; registrar desviaciones en el reporte del apply.
