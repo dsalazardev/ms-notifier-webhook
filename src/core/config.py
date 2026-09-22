@@ -1,6 +1,6 @@
 import json
 
-from pydantic import SecretStr
+from pydantic import EmailStr, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -13,10 +13,15 @@ class Settings(BaseSettings):
     AZURE_EMAIL_CONNECTION_STRING: SecretStr
 
     FROM_EMAIL: str
+    ALERT_EMAIL: EmailStr | None = None
 
     BOOKING_URL: str
 
     CORS_ORIGINS: list[str]
+
+    RATE_LIMIT_LEAD: str = "5/minute"
+    MAX_PDF_SIZE_MB: int = 10
+    LOG_LEVEL: str = "INFO"
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

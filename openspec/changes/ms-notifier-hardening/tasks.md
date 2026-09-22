@@ -8,9 +8,9 @@
 
 ## 2. Grupo A — Contrato y API
 
-- [ ] 2.1 Fijar `status_code=202` en `@router.post("/lead")` y corregir el docstring; verificar inspeccionando `app.openapi()` (`responses` del POST incluye `202`) y con el test de contrato de 6.2.
-- [ ] 2.2 Unificar el naming a `ms-notifier-webhook` en el título de FastAPI (`src/main.py`) y en el campo `service` de `/health`; verificar con `python -c` sobre `app.title` y con el test de health de 6.2.
-- [ ] 2.3 Implementar `GET /api/v1/health/ready` con checks de configuración sin I/O (JSON de Google parseable, `DRIVE_FILE_ID`, connection string, `CORS_ORIGINS` no vacío, `MAX_PDF_SIZE_MB > 0`, `RATE_LIMIT_LEAD` parseable) devolviendo 200 `ready` o 503 `not_ready` con `checks`; verificar que no se llama a Google y con los tests de readiness de 6.2.
+- [x] 2.1 Fijar `status_code=202` en `@router.post("/lead")` y corregir el docstring; verificar inspeccionando `app.openapi()` (`responses` del POST incluye `202`) y con el test de contrato de 6.2.
+- [x] 2.2 Unificar el naming a `ms-notifier-webhook` en el título de FastAPI (`src/main.py`) y en el campo `service` de `/health`; verificar con `python -c` sobre `app.title` y con el test de health de 6.2.
+- [x] 2.3 Implementar `GET /api/v1/health/ready` con checks de configuración sin I/O (JSON de Google parseable, `DRIVE_FILE_ID`, connection string, `CORS_ORIGINS` no vacío, `MAX_PDF_SIZE_MB > 0`, `RATE_LIMIT_LEAD` parseable) devolviendo 200 `ready` o 503 `not_ready` con `checks`; verificar que no se llama a Google y con los tests de readiness de 6.2.
 - [ ] 2.4 Documentar la nota de coordinación del frontend externo (`necesidad`→`need`, `PUBLIC_LEAD_ENDPOINT`) en `README.md`; verificar que la nota existe y que no se modificó el repo del frontend.
 
 ## 3. Grupo B — Resiliencia del pipeline
