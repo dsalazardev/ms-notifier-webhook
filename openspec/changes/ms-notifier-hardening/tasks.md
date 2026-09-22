@@ -41,13 +41,13 @@
 
 ## 6. Grupo E — Calidad (tests, lint, CI)
 
-- [ ] 6.1 Crear `conftest.py` que define variables de entorno dummy (sin secretos reales) antes de importar `src`, con fixtures de cliente ASGI y reset del limiter; verificar que `uv run pytest -q` colecta sin errores de import.
-- [ ] 6.2 Tests de contrato/API: payload válido 202; `necesidad` 422; email inválido 422; `need` ausente 422; health (naming) y readiness (200/503, sin llamar a Google); variables legacy presentes y `LOG_LEVEL=DEBUG`; verificar `uv run pytest` verde.
-- [ ] 6.3 Tests de pipeline con mocks (cero red): éxito, transitorio con retry, permanente sin retry, agotado con alerta, fallo de alerta, logs con lead/fase; verificar `uv run pytest` verde.
-- [ ] 6.4 Tests de rate limit (429 + `Retry-After`, exención de health) y CORS preflight (permitido 200/ACAO, no listado 400); verificar `uv run pytest` verde.
-- [ ] 6.5 Tests de servicios: validación PDF (firma/tamaño), refresh condicional y concurrente del token, contenido del email (saludo neutro, sin coma extra, adjunto branded); verificar `uv run pytest` verde.
-- [ ] 6.6 Formatear con `uv run ruff format .` y corregir con `uv run ruff check --fix .`; verificar `uv run ruff check .` y `uv run ruff format --check .` limpios.
-- [ ] 6.7 Crear `.github/workflows/ci.yml` (push/PR a `main`: setup-uv + Python 3.14, `uv sync --frozen`, `ruff check`, `ruff format --check`, `pytest -q`); verificar la sintaxis del YAML y el primer run en GitHub tras push (`actionlint` si está disponible).
+- [x] 6.1 Crear `conftest.py` que define variables de entorno dummy (sin secretos reales) antes de importar `src`, con fixtures de cliente ASGI y reset del limiter; verificar que `uv run pytest -q` colecta sin errores de import.
+- [x] 6.2 Tests de contrato/API: payload válido 202; `necesidad` 422; email inválido 422; `need` ausente 422; health (naming) y readiness (200/503, sin llamar a Google); variables legacy presentes y `LOG_LEVEL=DEBUG`; verificar `uv run pytest` verde.
+- [x] 6.3 Tests de pipeline con mocks (cero red): éxito, transitorio con retry, permanente sin retry, agotado con alerta, fallo de alerta, logs con lead/fase; verificar `uv run pytest` verde.
+- [x] 6.4 Tests de rate limit (429 + `Retry-After`, exención de health) y CORS preflight (permitido 200/ACAO, no listado 400); verificar `uv run pytest` verde.
+- [x] 6.5 Tests de servicios: validación PDF (firma/tamaño), refresh condicional y concurrente del token, contenido del email (saludo neutro, sin coma extra, adjunto branded); verificar `uv run pytest` verde.
+- [x] 6.6 Formatear con `uv run ruff format .` y corregir con `uv run ruff check --fix .`; verificar `uv run ruff check .` y `uv run ruff format --check .` limpios.
+- [x] 6.7 Crear `.github/workflows/ci.yml` (push/PR a `main`: setup-uv + Python 3.14, `uv sync --frozen`, `ruff check`, `ruff format --check`, `pytest -q`); verificar la sintaxis del YAML y el primer run en GitHub tras push (`actionlint` si está disponible).
 
 ## 7. Grupo F — Contenido del email
 

@@ -13,7 +13,7 @@ configure_logging()
 app = FastAPI(
     title="ms-notifier-webhook",
     description="Microservicio asíncrono para despachar recursos y correos a leads.",
-    version="1.0.0"
+    version="1.0.0",
 )
 
 app.state.limiter = limiter

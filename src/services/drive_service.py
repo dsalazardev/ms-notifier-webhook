@@ -76,9 +76,7 @@ class AsyncDriveService:
 
         try:
             async with httpx.AsyncClient(timeout=DRIVE_REQUEST_TIMEOUT_SECONDS) as client:
-                response = await client.get(
-                    url, headers={"Authorization": f"Bearer {token}"}
-                )
+                response = await client.get(url, headers={"Authorization": f"Bearer {token}"})
                 response.raise_for_status()
         except httpx.HTTPStatusError as e:
             status = e.response.status_code
@@ -93,7 +91,5 @@ class AsyncDriveService:
 
         raw_length = response.headers.get("content-length")
         content_length = int(raw_length) if raw_length and raw_length.isdigit() else None
-        validate_pdf_bytes(
-            response.content, max_bytes=max_bytes, content_length=content_length
-        )
+        validate_pdf_bytes(response.content, max_bytes=max_bytes, content_length=content_length)
         return response.content

@@ -21,9 +21,7 @@ class Settings(BaseSettings):
     MAX_PDF_SIZE_MB: int = 10
     LOG_LEVEL: str = "INFO"
 
-    model_config = SettingsConfigDict(
-        env_file=".env", env_file_encoding="utf-8", extra="ignore"
-    )
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     @property
     def google_creds_dict(self) -> dict:

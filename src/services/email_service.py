@@ -30,7 +30,7 @@ Quedo atento.
         },
         "attachments": [
             {
-                    "name": "Checklist-27-puntos-SALAZAR-Eng.pdf",
+                "name": "Checklist-27-puntos-SALAZAR-Eng.pdf",
                 "contentType": "application/pdf",
                 "contentInBase64": base64.b64encode(pdf_bytes).decode("utf-8"),
             }
