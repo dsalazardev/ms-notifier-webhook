@@ -6,11 +6,9 @@ from src.core.exceptions import EmailDeliveryError
 
 class AsyncEmailService:
     def __init__(self):
-        # Obtenemos la cadena de conexión de forma segura desde Pydantic
         self.connection_string = settings.AZURE_EMAIL_CONNECTION_STRING.get_secret_value()
 
     async def send_lead_email(self, to_email: str, need: str, pdf_bytes: bytes):
-        # 1. Estructuramos el payload exactamente como lo requiere la API de Azure
         message = {
             "senderAddress": settings.FROM_EMAIL,
             "recipients": {
@@ -29,7 +27,6 @@ Por favor, elige el horario que mejor se adapte a ti en el siguiente enlace:
 Quedo atento.
 """
             },
-            # 2. Azure exige que el PDF binario viaje codificado en Base64
             "attachments": [
                 {
                     "name": "Documento_Especial.pdf",

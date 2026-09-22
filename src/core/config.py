@@ -7,10 +7,10 @@ class Settings(BaseSettings):
     GOOGLE_CREDENTIALS_JSON: SecretStr
     DRIVE_FILE_ID: str
 
-    SMTP_SERVER: str
-    SMTP_PORT: int = 2525
-    SMTP_USER: str
-    SMTP_PASSWORD: SecretStr
+    AZURE_COMMUNICATION_ENDPOINT: str
+    AZURE_COMMUNICATION_KEY: SecretStr
+    AZURE_EMAIL_CONNECTION_STRING: SecretStr
+
     FROM_EMAIL: str
 
     CALENDLY_URL: str
