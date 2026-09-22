@@ -29,6 +29,7 @@ select = ["E", "F", "I", "UP", "B"]
 
 [tool.ruff.lint.per-file-ignores]
 "conftest.py" = ["E402"]
+"src/services/email_service.py" = ["E501"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

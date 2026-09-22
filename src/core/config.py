@@ -14,6 +14,11 @@ class Settings(BaseSettings):
     ALERT_EMAIL: EmailStr | None = None
 
     BOOKING_URL: str
+    LEAD_EMAIL_LOGO_URL: str = (
+        "https://raw.githubusercontent.com/dsalazardev/salazar-eng-landing"
+        "/main/public/isotipo-white.png"
+    )
+    LEAD_EMAIL_WHATSAPP_URL: str = "https://wa.me/573145919465"
 
     CORS_ORIGINS: list[str]
 

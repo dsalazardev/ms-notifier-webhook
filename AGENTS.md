@@ -397,6 +397,8 @@ There is no separate configuration file or runtime configuration class elsewhere
 | `AZURE_EMAIL_CONNECTION_STRING` | Connection string used to build the Azure `EmailClient`. | Required and directly used. |
 | `FROM_EMAIL` | Sender address for outbound email. | Required and directly used. |
 | `BOOKING_URL` | Booking link inserted into the email body. | Required and directly used. |
+| `LEAD_EMAIL_LOGO_URL` | Public URL of the white monogram shown in the lead email. | Optional; defaults to the raw GitHub PNG. |
+| `LEAD_EMAIL_WHATSAPP_URL` | WhatsApp link shown in the lead email footer. | Optional; defaults to `https://wa.me/573145919465`. |
 
 Never copy actual values from `.env` into source control or documentation.
 

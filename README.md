@@ -25,6 +25,8 @@ uv run uvicorn src.main:app --reload
 | `AZURE_EMAIL_CONNECTION_STRING` | Connection string de Azure Communication Services Email | Sí |
 | `FROM_EMAIL` | Remitente verificado en ACS | Sí |
 | `BOOKING_URL` | Enlace de agendamiento incluido en el email | Sí |
+| `LEAD_EMAIL_LOGO_URL` | URL pública del monograma blanco del correo (default: raw GitHub del isotipo blanco) | No |
+| `LEAD_EMAIL_WHATSAPP_URL` | Enlace de WhatsApp del footer del correo (default: `https://wa.me/573145919465`) | No |
 | `CORS_ORIGINS` | Allowlist JSON de orígenes permitidos (p. ej. `["http://localhost:4321"]`) | Sí |
 | `ALERT_EMAIL` | Destinatario de alertas por fallo definitivo del pipeline (default: `FROM_EMAIL`) | No |
 | `RATE_LIMIT_LEAD` | Límite por IP de `/lead` en formato limits (default: `5/minute`) | No |
