@@ -23,7 +23,7 @@ async def process_lead_pipeline(lead: LeadCreate):
         pdf_bytes = await drive_service.get_pdf_bytes(settings.DRIVE_FILE_ID)
 
         # 2. Notificar al cliente
-        await email_service.send_lead_email(lead.email, lead.name, pdf_bytes)
+        await email_service.send_lead_email(lead.email, lead.need, pdf_bytes)
 
         logger.info(f"Pipeline ejecutado exitosamente para {lead.email}")
 
