@@ -15,12 +15,12 @@
 
 ## 3. Grupo B — Resiliencia del pipeline
 
-- [ ] 3.1 Crear `src/core/retry.py` con `run_with_retries` (attempts=3, backoff exponencial 0.5s→1.0s con jitter ±25%, `is_retryable`, `on_retry`); verificar con los tests unitarios de política de 6.3 (éxito al segundo intento, sin retry en permanente, agotamiento).
-- [ ] 3.2 Extender la taxonomía: atributo `retryable` en `NotificationServiceError` y nueva `DocumentValidationError`; clasificar Drive (timeout/redthrottling 429/5xx retryable; 401/403/404 no) y Azure (excepción del SDK retryable; `Failed` no); verificar con los tests de clasificación de 6.3.
-- [ ] 3.3 Drive: credenciales lazy (`_get_credentials`), refresh solo si `not creds.valid`, con `asyncio.Lock` y `asyncio.to_thread`; verificar con los tests de 6.5 (`valid=True` no refresca; concurrencia ejecuta un único refresh).
-- [ ] 3.4 Validar el documento descargado (firma `%PDF-` en primeros 1024 bytes y tamaño ≤ `MAX_PDF_SIZE_MB`, por `Content-Length` y tamaño real); verificar con los tests de 6.5 (PDF válido, no-PDF y oversize → fallo permanente sin email).
-- [ ] 3.5 Integrar retries por fase en `process_lead_pipeline` (descarga y envío por separado, log de intento/fase) con alerta única al agotar o ante error permanente; verificar con los tests de 6.3 (transitorio→éxito sin alerta, permanente sin retry, agotado→alerta).
-- [ ] 3.6 Implementar `AsyncEmailService.send_alert_email` (fallback `ALERT_EMAIL`→`FROM_EMAIL`, sin adjunto y sin propagar el fallo de la alerta); verificar con los tests de 6.3 (fallback y fallo de alerta solo loguea).
+- [x] 3.1 Crear `src/core/retry.py` con `run_with_retries` (attempts=3, backoff exponencial 0.5s→1.0s con jitter ±25%, `is_retryable`, `on_retry`); verificar con los tests unitarios de política de 6.3 (éxito al segundo intento, sin retry en permanente, agotamiento).
+- [x] 3.2 Extender la taxonomía: atributo `retryable` en `NotificationServiceError` y nueva `DocumentValidationError`; clasificar Drive (timeout/redthrottling 429/5xx retryable; 401/403/404 no) y Azure (excepción del SDK retryable; `Failed` no); verificar con los tests de clasificación de 6.3.
+- [x] 3.3 Drive: credenciales lazy (`_get_credentials`), refresh solo si `not creds.valid`, con `asyncio.Lock` y `asyncio.to_thread`; verificar con los tests de 6.5 (`valid=True` no refresca; concurrencia ejecuta un único refresh).
+- [x] 3.4 Validar el documento descargado (firma `%PDF-` en primeros 1024 bytes y tamaño ≤ `MAX_PDF_SIZE_MB`, por `Content-Length` y tamaño real); verificar con los tests de 6.5 (PDF válido, no-PDF y oversize → fallo permanente sin email).
+- [x] 3.5 Integrar retries por fase en `process_lead_pipeline` (descarga y envío por separado, log de intento/fase) con alerta única al agotar o ante error permanente; verificar con los tests de 6.3 (transitorio→éxito sin alerta, permanente sin retry, agotado→alerta).
+- [x] 3.6 Implementar `AsyncEmailService.send_alert_email` (fallback `ALERT_EMAIL`→`FROM_EMAIL`, sin adjunto y sin propagar el fallo de la alerta); verificar con los tests de 6.3 (fallback y fallo de alerta solo loguea).
 
 ## 4. Grupo C — Seguridad
 

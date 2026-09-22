@@ -44,6 +44,7 @@ async def run_with_retries(operation, *, attempts=3, base_delay=0.5, factor=2.0,
 - `attempts=3` (2 reintentos): delays ~0.5s y ~1.0s con jitter ±25% ⇒ <2.5s de espera máxima.
 - `process_lead_pipeline` envuelve la descarga y el envío por separado, de modo que el reintento de email no vuelve a descargar el PDF.
 - **Rationale**: el orquestador conoce la fase, puede loguear el intento y dispara la alerta una sola vez al final; los servicios permanecen puros.
+- **N1 (decisión de implementación)**: el timeout por intento de la descarga de Drive se reduce a `15.0s` (`DRIVE_REQUEST_TIMEOUT_SECONDS`), de modo que 3 intentos + backoff no acumulen ~90s con el timeout anterior de 30s (peor caso ≈ 47s).
 - **Alternativas**: decorador en los servicios (oculta fase/alertas); `tenacity` (dependencia extra para una función de 20 líneas).
 
 ### D2. Taxonomía de errores explícita y retryable
