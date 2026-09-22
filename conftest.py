@@ -13,6 +13,8 @@ os.environ["AZURE_EMAIL_CONNECTION_STRING"] = (
 )
 os.environ["FROM_EMAIL"] = "noreply@example.com"
 os.environ["BOOKING_URL"] = "https://booking.example.com/test"
+os.environ["LEAD_EMAIL_LOGO_URL"] = "https://example.com/isotipo-white.png"
+os.environ["LEAD_EMAIL_WHATSAPP_URL"] = "https://wa.me/573145919465"
 os.environ["CORS_ORIGINS"] = '["http://localhost:4321"]'
 os.environ["RATE_LIMIT_LEAD"] = "1000/minute"
 os.environ["MAX_PDF_SIZE_MB"] = "10"

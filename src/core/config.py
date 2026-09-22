@@ -14,17 +14,14 @@ class Settings(BaseSettings):
     ALERT_EMAIL: EmailStr | None = None
 
     BOOKING_URL: str
-    LEAD_EMAIL_LOGO_URL: str = (
-        "https://raw.githubusercontent.com/dsalazardev/salazar-eng-landing"
-        "/main/public/isotipo-white.png"
-    )
-    LEAD_EMAIL_WHATSAPP_URL: str = "https://wa.me/573145919465"
+    LEAD_EMAIL_LOGO_URL: str
+    LEAD_EMAIL_WHATSAPP_URL: str
 
     CORS_ORIGINS: list[str]
 
-    RATE_LIMIT_LEAD: str = "5/minute"
-    MAX_PDF_SIZE_MB: int = 10
-    LOG_LEVEL: str = "INFO"
+    RATE_LIMIT_LEAD: str
+    MAX_PDF_SIZE_MB: int
+    LOG_LEVEL: str
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
