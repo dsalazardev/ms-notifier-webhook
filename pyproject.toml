@@ -11,6 +11,7 @@ dependencies = [
     "google-auth>=2.35.0",
     "slowapi>=0.1.9",
     "azure-communication-email>=1.1.0",
+    "aiohttp>=3.14.3",
 ]
 
 [dependency-groups]
