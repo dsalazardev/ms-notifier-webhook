@@ -1,10 +1,12 @@
 import logging
+
 from fastapi import APIRouter, BackgroundTasks
+
+from src.core.config import settings
+from src.core.exceptions import NotificationServiceError
 from src.models.lead import LeadCreate
 from src.services.drive_service import AsyncDriveService
 from src.services.email_service import AsyncEmailService
-from src.core.config import settings
-from src.core.exceptions import NotificationServiceError
 
 router = APIRouter()
 logger = logging.getLogger(__name__)

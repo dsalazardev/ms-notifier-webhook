@@ -2,9 +2,9 @@
 
 ## 1. Setup de dependencias y configuración de calidad
 
-- [ ] 1.1 Agregar `slowapi` a dependencias de runtime y `pytest`, `pytest-asyncio`, `ruff` al grupo dev de `pyproject.toml`; verificar con `uv sync` que la resolución e instalación terminan sin error.
-- [ ] 1.2 Configurar `[tool.ruff]` (target py314, line-length y reglas E/F/I/UP/B) y `[tool.pytest.ini_options]` (`asyncio_mode = "auto"`, `testpaths = ["tests"]`) en `pyproject.toml`; verificar con `uv run ruff check .` sin errores y `uv run pytest --collect-only -q`.
-- [ ] 1.3 Regenerar `uv.lock` y verificar consistencia con `uv lock --check` (exit 0).
+- [x] 1.1 Agregar `slowapi` a dependencias de runtime y `pytest`, `pytest-asyncio`, `ruff` al grupo dev de `pyproject.toml`; verificar con `uv sync` que la resolución e instalación terminan sin error.
+- [x] 1.2 Configurar `[tool.ruff]` (target py314, line-length y reglas E/F/I/UP/B) y `[tool.pytest.ini_options]` (`asyncio_mode = "auto"`, `testpaths = ["tests"]`) en `pyproject.toml`; verificar con `uv run ruff check .` sin errores y `uv run pytest --collect-only -q`.
+- [x] 1.3 Regenerar `uv.lock` y verificar consistencia con `uv lock --check` (exit 0).
 
 ## 2. Grupo A — Contrato y API
 

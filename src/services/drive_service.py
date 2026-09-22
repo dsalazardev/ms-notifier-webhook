@@ -1,6 +1,7 @@
+import google.auth.transport.requests
 import httpx
 from google.oauth2 import service_account
-import google.auth.transport.requests
+
 from src.core.config import settings
 from src.core.exceptions import DriveDownloadError
 
@@ -30,6 +31,6 @@ class AsyncDriveService:
                 response.raise_for_status()
                 return response.content
         except httpx.HTTPError as e:
-            raise DriveDownloadError(f"Error HTTP al descargar de Drive: {str(e)}")
+            raise DriveDownloadError(f"Error HTTP al descargar de Drive: {str(e)}") from e
         except Exception as e:
-            raise DriveDownloadError(f"Error inesperado en Drive: {str(e)}")
+            raise DriveDownloadError(f"Error inesperado en Drive: {str(e)}") from e

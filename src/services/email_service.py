@@ -1,5 +1,7 @@
 import base64
+
 from azure.communication.email.aio import EmailClient
+
 from src.core.config import settings
 from src.core.exceptions import EmailDeliveryError
 
@@ -49,4 +51,6 @@ Quedo atento.
                     raise EmailDeliveryError(f"Azure rechazó el correo: {error_msg}")
 
         except Exception as e:
-            raise EmailDeliveryError(f"Fallo crítico al conectar con Azure Email para {to_email}: {str(e)}")
+            raise EmailDeliveryError(
+                f"Fallo crítico al conectar con Azure Email para {to_email}: {str(e)}"
+            ) from e

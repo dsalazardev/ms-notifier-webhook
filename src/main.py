@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.core.config import settings
 from src.api.webhook import router as webhook_router
+from src.core.config import settings
 
 app = FastAPI(
     title="ms-notifications",
