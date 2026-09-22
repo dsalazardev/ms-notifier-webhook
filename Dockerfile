@@ -1,21 +1,31 @@
-FROM python:3.14-slim
+FROM python:3.14-slim AS builder
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+COPY --from=ghcr.io/astral-sh/uv:0.12.15 /uv /uvx /bin/
+
+ENV UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy
 
 WORKDIR /app
 
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
-
-COPY pyproject.toml uv.lock ./
-
-RUN uv sync --frozen --no-dev --no-install-project
+# Solo dependencias: la capa se cachea mientras pyproject/uv.lock no cambien
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    uv sync --frozen --no-dev --no-install-project
 
 COPY src/ ./src/
 
-ENV PATH="/app/.venv/bin:$PATH"
+FROM python:3.14-slim AS runtime
 
-RUN useradd --create-home --uid 1000 appuser && chown -R appuser:appuser /app
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PATH="/app/.venv/bin:$PATH"
+
+RUN useradd --create-home --uid 1000 appuser
+
+WORKDIR /app
+
+COPY --from=builder --chown=appuser:appuser /app /app
 
 USER appuser
 

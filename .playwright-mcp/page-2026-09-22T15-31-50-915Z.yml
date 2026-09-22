@@ -1,0 +1,964 @@
+- generic [ref=f1e3]:
+  - generic [ref=f1e7]:
+    - generic [ref=f1e9]:
+      - img "Doligestión" [ref=f1e10]
+      - generic [ref=f1e11]: Doligestión
+    - separator [ref=f1e12]
+    - navigation [ref=f1e14]:
+      - link "Inicio" [ref=f1e15] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f1e20]: Compras
+      - link "Proveedores" [ref=f1e21] [cursor=pointer]:
+        - /url: /suppliers
+      - link "Facturas de compra" [ref=f1e27] [cursor=pointer]:
+        - /url: /supplier-invoices
+      - generic [ref=f1e32]: Ventas
+      - link "Clientes" [ref=f1e33] [cursor=pointer]:
+        - /url: /clients
+      - link "Presupuestos" [ref=f1e39] [cursor=pointer]:
+        - /url: /proposals
+      - link "Contratos" [ref=f1e44] [cursor=pointer]:
+        - /url: /contracts
+      - link "Pedidos" [ref=f1e50] [cursor=pointer]:
+        - /url: /orders
+      - link "Facturas" [ref=f1e56] [cursor=pointer]:
+        - /url: /invoices
+      - link "TPV" [ref=f1e61] [cursor=pointer]:
+        - /url: https://dolibarr.doligestion2.doligestion.es/takepos/index.php
+      - link "Modelos IVA" [ref=f1e65] [cursor=pointer]:
+        - /url: /tax-models
+      - generic [ref=f1e70]: Gestión Comercial
+      - link "Productos" [ref=f1e71] [cursor=pointer]:
+        - /url: /products
+      - link "Servicios" [ref=f1e76] [cursor=pointer]:
+        - /url: /services
+      - link "Almacenes" [ref=f1e89] [cursor=pointer]:
+        - /url: /warehouses
+      - link "Listas de materiales" [ref=f1e94] [cursor=pointer]:
+        - /url: /boms
+      - link "Cuentas bancarias" [ref=f1e100] [cursor=pointer]:
+        - /url: /banks
+      - generic [ref=f1e104]: Proyectos
+      - link "Proyectos" [ref=f1e105] [cursor=pointer]:
+        - /url: /projects
+      - generic [ref=f1e110]: Recursos Humanos
+      - link "Empleados" [ref=f1e111] [cursor=pointer]:
+        - /url: /employees
+      - link "Jornadas" [ref=f1e118] [cursor=pointer]:
+        - /url: /workdays
+      - link "Fichajes modificados" [ref=f1e124] [cursor=pointer]:
+        - /url: /workdays/modified
+      - link "Resumen semanal" [ref=f1e130] [cursor=pointer]:
+        - /url: /weekly-summary
+      - generic [ref=f1e134]: Configuración
+      - generic [ref=f1e135] [cursor=pointer]: Contraer menú
+      - generic [ref=f1e140] [cursor=pointer]: Todos los proyectos
+      - generic [ref=f1e147] [cursor=pointer]:
+        - generic [ref=f1e148]: A
+        - generic [ref=f1e149]: admin
+  - generic [ref=f1e157]:
+    - generic [ref=f1e158]:
+      - generic "Facturas de Venta" [ref=f1e159]:
+        - generic [ref=f1e166]:
+          - generic [ref=f1e167]: Facturas de Venta
+          - generic [ref=f1e168]: Gestión y seguimiento de facturas de clientes
+      - button "Crear" [ref=f1e170]
+    - generic [ref=f1e176]:
+      - generic [ref=f1e178]:
+        - generic [ref=f1e179]:
+          - generic [ref=f1e183] [cursor=pointer]:
+            - generic: Estado
+            - combobox "Estado" [ref=f1e187]:
+              - generic [ref=f1e188]: Todos
+          - generic [ref=f1e197] [cursor=pointer]:
+            - generic: Forma de pago
+            - combobox "Forma de pago" [ref=f1e201]:
+              - generic [ref=f1e202]: Todas
+          - generic [ref=f1e210]:
+            - generic: Fechas
+            - group "Fechas" [ref=f1e213]:
+              - generic [ref=f1e214]:
+                - textbox "Desde" [ref=f1e216]: 22/8/2026
+                - generic [ref=f1e217]: –
+                - textbox "Hasta" [ref=f1e219]: 22/9/2026
+            - button "Open calendar" [ref=f1e222] [cursor=pointer]
+        - generic [ref=f1e227]:
+          - generic [ref=f1e228]:
+            - generic:
+              - generic: Buscar por...
+              - generic:
+                - textbox "Buscar por..."
+          - generic [ref=f1e230]:
+            - button "CSV" [disabled]
+          - button "Buscar" [ref=f1e232]
+      - generic [ref=f1e240]:
+        - table [ref=f1e242]:
+          - rowgroup [ref=f1e243]:
+            - row [ref=f1e244]:
+              - columnheader "Estado y forma de pago" [ref=f1e245]
+              - columnheader "Número" [ref=f1e246]
+              - columnheader "Fecha" [ref=f1e247]
+              - columnheader "Cliente" [ref=f1e248]
+              - columnheader "BI" [ref=f1e249]
+              - columnheader "IVA" [ref=f1e250]
+              - columnheader "RE" [ref=f1e251]
+              - columnheader "IRPF" [ref=f1e252]
+              - columnheader "Total" [ref=f1e253]
+              - columnheader "Pendiente" [ref=f1e254]
+              - columnheader "Vencimiento" [ref=f1e255]
+              - columnheader "Acciones" [ref=f1e256]
+          - rowgroup [ref=f1e257]:
+            - button "Ver factura (PROV211)" [ref=f1e258] [cursor=pointer]:
+              - cell [ref=f1e259]:
+                - img "Transferencia" [ref=f1e266]
+              - cell "(PROV211)" [ref=f1e270]
+              - cell "22/09/2026" [ref=f1e272]
+              - cell "PEDRO HOLGUIN" [ref=f1e274]
+              - cell "-1.040,000 €" [ref=f1e276]
+              - cell "-41,600 €" [ref=f1e278]
+              - cell "0,000 €" [ref=f1e280]
+              - cell "0,000 €" [ref=f1e282]
+              - cell "-1.081,600 €" [ref=f1e284]
+              - cell "-1.081,600 €" [ref=f1e286]
+              - cell "22/09/2026" [ref=f1e288]
+              - cell [ref=f1e290]:
+                - generic [ref=f1e291]:
+                  - button "Validar" [ref=f1e293]
+                  - button "Eliminar" [ref=f1e299]
+            - button "Ver factura IR2609-0004" [ref=f1e305] [cursor=pointer]:
+              - cell [ref=f1e306]:
+                - img "Sin método" [ref=f1e311]
+              - cell "IR2609-0004" [ref=f1e322]
+              - cell "21/09/2026" [ref=f1e324]
+              - cell "PEDRO HOLGUIN" [ref=f1e326]
+              - cell "1.040,000 €" [ref=f1e328]
+              - cell "41,600 €" [ref=f1e330]
+              - cell "0,000 €" [ref=f1e332]
+              - cell "0,000 €" [ref=f1e334]
+              - cell "1.081,600 €" [ref=f1e336]
+              - cell "1.081,600 €" [ref=f1e338]
+              - cell "21/09/2026" [ref=f1e340]
+              - cell [ref=f1e342]:
+                - generic [ref=f1e343]:
+                  - button "Marcar pagada" [ref=f1e345]
+                  - button "Más opciones" [ref=f1e351]
+            - button "Ver factura (PROV210)" [ref=f1e358] [cursor=pointer]:
+              - cell [ref=f1e359]:
+                - img "Tarjeta" [ref=f1e366]
+              - cell "(PROV210)" [ref=f1e370]
+              - cell "21/09/2026" [ref=f1e372]
+              - cell "SPRING SAS" [ref=f1e374]
+              - cell "1.054,990 €" [ref=f1e376]
+              - cell "43,100 €" [ref=f1e378]
+              - cell "5,410 €" [ref=f1e380]
+              - cell "197,600 €" [ref=f1e382]
+              - cell "905,900 €" [ref=f1e384]
+              - cell "905,900 €" [ref=f1e386]
+              - cell "22/09/2026" [ref=f1e388]
+              - cell [ref=f1e390]:
+                - generic [ref=f1e391]:
+                  - button "Validar" [ref=f1e393]
+                  - button "Eliminar" [ref=f1e399]
+            - button "Ver factura (PROV208)" [ref=f1e405] [cursor=pointer]:
+              - cell [ref=f1e406]:
+                - img "Sin método" [ref=f1e413]
+              - cell "(PROV208)" [ref=f1e424]
+              - cell "18/09/2026" [ref=f1e426]
+              - cell "SPRING SAS" [ref=f1e428]
+              - cell "568,970 €" [ref=f1e430]
+              - cell "103,140 €" [ref=f1e432]
+              - cell "25,380 €" [ref=f1e434]
+              - cell "91,960 €" [ref=f1e436]
+              - cell "605,530 €" [ref=f1e438]
+              - cell "605,530 €" [ref=f1e440]
+              - cell "18/09/2026" [ref=f1e442]
+              - cell [ref=f1e444]:
+                - generic [ref=f1e445]:
+                  - button "Validar" [ref=f1e447]
+                  - button "Eliminar" [ref=f1e453]
+            - button "Ver factura IN2609-0072" [ref=f1e459] [cursor=pointer]:
+              - cell [ref=f1e460]:
+                - img "Sin método" [ref=f1e465]
+              - cell "IN2609-0072" [ref=f1e476]
+              - cell "18/09/2026" [ref=f1e478]
+              - cell "SPRING SAS" [ref=f1e480]
+              - cell "548,980 €" [ref=f1e482]
+              - cell "103,140 €" [ref=f1e484]
+              - cell "25,380 €" [ref=f1e486]
+              - cell "91,960 €" [ref=f1e488]
+              - cell "585,540 €" [ref=f1e490]
+              - cell "485,540 €" [ref=f1e492]
+              - cell "18/09/2026" [ref=f1e494]
+              - cell [ref=f1e496]:
+                - generic [ref=f1e497]:
+                  - button "Marcar pagada" [ref=f1e499]
+                  - button "Más opciones" [ref=f1e505]
+            - button "Ver factura (PROV207)" [ref=f1e512] [cursor=pointer]:
+              - cell [ref=f1e513]:
+                - img "Sin método" [ref=f1e520]
+              - cell "(PROV207)" [ref=f1e531]
+              - cell "18/09/2026" [ref=f1e533]
+              - cell "SPRING SAS" [ref=f1e535]
+              - cell "568,970 €" [ref=f1e537]
+              - cell "103,140 €" [ref=f1e539]
+              - cell "25,380 €" [ref=f1e541]
+              - cell "91,960 €" [ref=f1e543]
+              - cell "605,530 €" [ref=f1e545]
+              - cell "605,530 €" [ref=f1e547]
+              - cell "18/09/2026" [ref=f1e549]
+              - cell [ref=f1e551]:
+                - generic [ref=f1e552]:
+                  - button "Validar" [ref=f1e554]
+                  - button "Eliminar" [ref=f1e560]
+            - button "Ver factura IN2609-0073" [ref=f1e566] [cursor=pointer]:
+              - cell [ref=f1e567]:
+                - img "Transferencia" [ref=f1e572]
+              - cell "IN2609-0073" [ref=f1e576]
+              - cell "18/09/2026" [ref=f1e578]
+              - cell "SPRING SAS" [ref=f1e580]
+              - cell "1.189,990 €" [ref=f1e582]
+              - cell "62,600 €" [ref=f1e584]
+              - cell "10,400 €" [ref=f1e586]
+              - cell "216,600 €" [ref=f1e588]
+              - cell "1.046,390 €" [ref=f1e590]
+              - cell "746,390 €" [ref=f1e592]
+              - cell "19/09/2026" [ref=f1e594]
+              - cell [ref=f1e596]:
+                - generic [ref=f1e597]:
+                  - button "Marcar pagada" [ref=f1e599]
+                  - button "Más opciones" [ref=f1e605]
+            - button "Ver factura IN2609-0070" [ref=f1e612] [cursor=pointer]:
+              - cell [ref=f1e613]:
+                - img "Transferencia" [ref=f1e618]
+              - cell "IN2609-0070" [ref=f1e622]
+              - cell "17/09/2026" [ref=f1e624]
+              - cell "Xavi Jorge" [ref=f1e626]
+              - cell "1.543,900 €" [ref=f1e628]
+              - cell "146,330 €" [ref=f1e630]
+              - cell "31,030 €" [ref=f1e632]
+              - cell "44,450 €" [ref=f1e634]
+              - cell "1.676,810 €" [ref=f1e636]
+              - cell "1.676,810 €" [ref=f1e638]
+              - cell "18/09/2026" [ref=f1e640]
+              - cell [ref=f1e642]:
+                - generic [ref=f1e643]:
+                  - button "Marcar pagada" [ref=f1e645]
+                  - button "Más opciones" [ref=f1e651]
+            - button "Ver factura (PROV194)" [ref=f1e658] [cursor=pointer]:
+              - cell [ref=f1e659]:
+                - img "Sin método" [ref=f1e666]
+              - cell "(PROV194)" [ref=f1e677]
+              - cell "16/09/2026" [ref=f1e679]
+              - cell "Xavi Jorge" [ref=f1e681]
+              - cell "19,990 €" [ref=f1e683]
+              - cell "0,000 €" [ref=f1e685]
+              - cell "0,000 €" [ref=f1e687]
+              - cell "0,000 €" [ref=f1e689]
+              - cell "19,990 €" [ref=f1e691]
+              - cell "19,990 €" [ref=f1e693]
+              - cell "16/10/2026" [ref=f1e695]
+              - cell [ref=f1e697]:
+                - generic [ref=f1e698]:
+                  - button "Validar" [ref=f1e700]
+                  - button "Eliminar" [ref=f1e706]
+            - button "Ver factura (PROV191)" [ref=f1e712] [cursor=pointer]:
+              - cell [ref=f1e713]:
+                - img "Sin método" [ref=f1e720]
+              - cell "(PROV191)" [ref=f1e731]
+              - cell "16/09/2026" [ref=f1e733]
+              - cell "Xavi Jorge" [ref=f1e735]
+              - cell "1.843,000 €" [ref=f1e737]
+              - cell "0,000 €" [ref=f1e739]
+              - cell "0,000 €" [ref=f1e741]
+              - cell "93,780 €" [ref=f1e743]
+              - cell "1.843,000 €" [ref=f1e745]
+              - cell "1.843,000 €" [ref=f1e747]
+              - cell "16/09/2026" [ref=f1e749]
+              - cell [ref=f1e751]:
+                - generic [ref=f1e752]:
+                  - button "Validar" [ref=f1e754]
+                  - button "Eliminar" [ref=f1e760]
+            - button "Ver factura (PROV190)" [ref=f1e766] [cursor=pointer]:
+              - cell [ref=f1e767]:
+                - img "Sin método" [ref=f1e774]
+              - cell "(PROV190)" [ref=f1e785]
+              - cell "16/09/2026" [ref=f1e787]
+              - cell "Xavi Jorge" [ref=f1e789]
+              - cell "2.110,000 €" [ref=f1e791]
+              - cell "87,300 €" [ref=f1e793]
+              - cell "11,200 €" [ref=f1e795]
+              - cell "95,400 €" [ref=f1e797]
+              - cell "2.113,100 €" [ref=f1e799]
+              - cell "2.113,100 €" [ref=f1e801]
+              - cell "16/09/2026" [ref=f1e803]
+              - cell [ref=f1e805]:
+                - generic [ref=f1e806]:
+                  - button "Validar" [ref=f1e808]
+                  - button "Eliminar" [ref=f1e814]
+            - button "Ver factura (PROV189)" [ref=f1e820] [cursor=pointer]:
+              - cell [ref=f1e821]:
+                - img "Transferencia" [ref=f1e828]
+              - cell "(PROV189)" [ref=f1e832]
+              - cell "16/09/2026" [ref=f1e834]
+              - cell "SPRING SAS" [ref=f1e836]
+              - cell "1.054,990 €" [ref=f1e838]
+              - cell "43,100 €" [ref=f1e840]
+              - cell "5,410 €" [ref=f1e842]
+              - cell "197,600 €" [ref=f1e844]
+              - cell "905,900 €" [ref=f1e846]
+              - cell "905,900 €" [ref=f1e848]
+              - cell "17/09/2026" [ref=f1e850]
+              - cell [ref=f1e852]:
+                - generic [ref=f1e853]:
+                  - button "Validar" [ref=f1e855]
+                  - button "Eliminar" [ref=f1e861]
+            - button "Ver factura (PROV188)" [ref=f1e867] [cursor=pointer]:
+              - cell [ref=f1e868]:
+                - img "Transferencia" [ref=f1e875]
+              - cell "(PROV188)" [ref=f1e879]
+              - cell "16/09/2026" [ref=f1e881]
+              - cell "SPRING SAS" [ref=f1e883]
+              - cell "400,000 €" [ref=f1e885]
+              - cell "34,000 €" [ref=f1e887]
+              - cell "4,700 €" [ref=f1e889]
+              - cell "19,000 €" [ref=f1e891]
+              - cell "419,700 €" [ref=f1e893]
+              - cell "419,700 €" [ref=f1e895]
+              - cell "17/09/2026" [ref=f1e897]
+              - cell [ref=f1e899]:
+                - generic [ref=f1e900]:
+                  - button "Validar" [ref=f1e902]
+                  - button "Eliminar" [ref=f1e908]
+            - button "Ver factura (PROV187)" [ref=f1e914] [cursor=pointer]:
+              - cell [ref=f1e915]:
+                - img "Sin método" [ref=f1e922]
+              - cell "(PROV187)" [ref=f1e933]
+              - cell "16/09/2026" [ref=f1e935]
+              - cell "SPRING SAS" [ref=f1e937]
+              - cell "1.054,990 €" [ref=f1e939]
+              - cell "0,000 €" [ref=f1e941]
+              - cell "0,000 €" [ref=f1e943]
+              - cell "197,600 €" [ref=f1e945]
+              - cell "1.054,990 €" [ref=f1e947]
+              - cell "1.054,990 €" [ref=f1e949]
+              - cell "16/09/2026" [ref=f1e951]
+              - cell [ref=f1e953]:
+                - generic [ref=f1e954]:
+                  - button "Validar" [ref=f1e956]
+                  - button "Eliminar" [ref=f1e962]
+            - button "Ver factura (PROV198)" [ref=f1e968] [cursor=pointer]:
+              - cell [ref=f1e969]:
+                - img "Efectivo" [ref=f1e976]
+              - cell "(PROV198)" [ref=f1e981]
+              - cell "16/09/2026" [ref=f1e983]
+              - cell "SPRING SAS" [ref=f1e985]
+              - cell "1.157,370 €" [ref=f1e987]
+              - cell "50,390 €" [ref=f1e989]
+              - cell "7,220 €" [ref=f1e991]
+              - cell "204,250 €" [ref=f1e993]
+              - cell "1.010,730 €" [ref=f1e995]
+              - cell "1.010,730 €" [ref=f1e997]
+              - cell "31/10/2026" [ref=f1e999]
+              - cell [ref=f1e1001]:
+                - generic [ref=f1e1002]:
+                  - button "Validar" [ref=f1e1004]
+                  - button "Eliminar" [ref=f1e1010]
+            - button "Ver factura (PROV197)" [ref=f1e1016] [cursor=pointer]:
+              - cell [ref=f1e1017]:
+                - img "Transferencia" [ref=f1e1024]
+              - cell "(PROV197)" [ref=f1e1028]
+              - cell "16/09/2026" [ref=f1e1030]
+              - cell "PEDRO HOLGUIN" [ref=f1e1032]
+              - cell "1.515,940 €" [ref=f1e1034]
+              - cell "143,690 €" [ref=f1e1036]
+              - cell "30,440 €" [ref=f1e1038]
+              - cell "285,610 €" [ref=f1e1040]
+              - cell "1.404,460 €" [ref=f1e1042]
+              - cell "1.404,460 €" [ref=f1e1044]
+              - cell "17/09/2026" [ref=f1e1046]
+              - cell [ref=f1e1048]:
+                - generic [ref=f1e1049]:
+                  - button "Validar" [ref=f1e1051]
+                  - button "Eliminar" [ref=f1e1057]
+            - button "Ver factura (PROV192)" [ref=f1e1063] [cursor=pointer]:
+              - cell [ref=f1e1064]:
+                - img "Sin método" [ref=f1e1071]
+              - cell "(PROV192)" [ref=f1e1082]
+              - cell "16/09/2026" [ref=f1e1084]
+              - cell "Xavi Jorge" [ref=f1e1086]
+              - cell "1.843,000 €" [ref=f1e1088]
+              - cell "0,000 €" [ref=f1e1090]
+              - cell "0,000 €" [ref=f1e1092]
+              - cell "93,780 €" [ref=f1e1094]
+              - cell "1.843,000 €" [ref=f1e1096]
+              - cell "1.843,000 €" [ref=f1e1098]
+              - cell "16/09/2026" [ref=f1e1100]
+              - cell [ref=f1e1102]:
+                - generic [ref=f1e1103]:
+                  - button "Validar" [ref=f1e1105]
+                  - button "Eliminar" [ref=f1e1111]
+            - button "Ver factura (PROV195)" [ref=f1e1117] [cursor=pointer]:
+              - cell [ref=f1e1118]:
+                - img "Transferencia" [ref=f1e1125]
+              - cell "(PROV195)" [ref=f1e1129]
+              - cell "16/09/2026" [ref=f1e1131]
+              - cell "SPRING SAS" [ref=f1e1133]
+              - cell "1.102,380 €" [ref=f1e1135]
+              - cell "43,040 €" [ref=f1e1137]
+              - cell "5,400 €" [ref=f1e1139]
+              - cell "197,600 €" [ref=f1e1141]
+              - cell "953,220 €" [ref=f1e1143]
+              - cell "953,220 €" [ref=f1e1145]
+              - cell "16/10/2026" [ref=f1e1147]
+              - cell [ref=f1e1149]:
+                - generic [ref=f1e1150]:
+                  - button "Validar" [ref=f1e1152]
+                  - button "Eliminar" [ref=f1e1158]
+            - button "Ver factura (PROV193)" [ref=f1e1164] [cursor=pointer]:
+              - cell [ref=f1e1165]:
+                - img "Sin método" [ref=f1e1172]
+              - cell "(PROV193)" [ref=f1e1183]
+              - cell "16/09/2026" [ref=f1e1185]
+              - cell "Xavi Jorge" [ref=f1e1187]
+              - cell "1.843,000 €" [ref=f1e1189]
+              - cell "42,010 €" [ref=f1e1191]
+              - cell "5,280 €" [ref=f1e1193]
+              - cell "93,600 €" [ref=f1e1195]
+              - cell "1.885,010 €" [ref=f1e1197]
+              - cell "1.885,010 €" [ref=f1e1199]
+              - cell "16/09/2026" [ref=f1e1201]
+              - cell [ref=f1e1203]:
+                - generic [ref=f1e1204]:
+                  - button "Validar" [ref=f1e1206]
+                  - button "Eliminar" [ref=f1e1212]
+            - button "Ver factura (PROV196)" [ref=f1e1218] [cursor=pointer]:
+              - cell [ref=f1e1219]:
+                - img "Sin método" [ref=f1e1226]
+              - cell "(PROV196)" [ref=f1e1237]
+              - cell "16/09/2026" [ref=f1e1239]
+              - cell "PEDRO HOLGUIN" [ref=f1e1241]
+              - cell "1.588,980 €" [ref=f1e1243]
+              - cell "144,740 €" [ref=f1e1245]
+              - cell "30,580 €" [ref=f1e1247]
+              - cell "289,560 €" [ref=f1e1249]
+              - cell "1.474,740 €" [ref=f1e1251]
+              - cell "1.474,740 €" [ref=f1e1253]
+              - cell "16/09/2026" [ref=f1e1255]
+              - cell [ref=f1e1257]:
+                - generic [ref=f1e1258]:
+                  - button "Validar" [ref=f1e1260]
+                  - button "Eliminar" [ref=f1e1266]
+            - button "Ver factura IN2609-0069" [ref=f1e1272] [cursor=pointer]:
+              - cell [ref=f1e1273]:
+                - img "Sin método" [ref=f1e1278]
+              - cell "IN2609-0069" [ref=f1e1289]
+              - cell "16/09/2026" [ref=f1e1291]
+              - cell "PEDRO HOLGUIN" [ref=f1e1293]
+              - cell "545,980 €" [ref=f1e1295]
+              - cell "103,140 €" [ref=f1e1297]
+              - cell "25,380 €" [ref=f1e1299]
+              - cell "91,960 €" [ref=f1e1301]
+              - cell "582,540 €" [ref=f1e1303]
+              - cell "582,540 €" [ref=f1e1305]
+              - cell "16/09/2026" [ref=f1e1307]
+              - cell [ref=f1e1309]:
+                - generic [ref=f1e1310]:
+                  - button "Marcar pagada" [ref=f1e1312]
+                  - button "Más opciones" [ref=f1e1318]
+            - button "Ver factura IN2609-0071" [ref=f1e1325] [cursor=pointer]:
+              - cell [ref=f1e1326]:
+                - img "Transferencia" [ref=f1e1331]
+              - cell "IN2609-0071" [ref=f1e1335]
+              - cell "16/09/2026" [ref=f1e1337]
+              - cell "SPRING SAS" [ref=f1e1339]
+              - cell "603,980 €" [ref=f1e1341]
+              - cell "114,690 €" [ref=f1e1343]
+              - cell "28,240 €" [ref=f1e1345]
+              - cell "102,410 €" [ref=f1e1347]
+              - cell "644,500 €" [ref=f1e1349]
+              - cell "444,500 €" [ref=f1e1351]
+              - cell "16/09/2026" [ref=f1e1353]
+              - cell [ref=f1e1355]:
+                - generic [ref=f1e1356]:
+                  - button "Marcar pagada" [ref=f1e1358]
+                  - button "Más opciones" [ref=f1e1364]
+            - button "Ver factura (PROV199)" [ref=f1e1371] [cursor=pointer]:
+              - cell [ref=f1e1372]:
+                - img "Sin método" [ref=f1e1379]
+              - cell "(PROV199)" [ref=f1e1390]
+              - cell "16/09/2026" [ref=f1e1392]
+              - cell "SPRING SAS" [ref=f1e1394]
+              - cell "1.122,370 €" [ref=f1e1396]
+              - cell "43,040 €" [ref=f1e1398]
+              - cell "5,401 €" [ref=f1e1400]
+              - cell "197,600 €" [ref=f1e1402]
+              - cell "1.165,410 €" [ref=f1e1404]
+              - cell "1.165,410 €" [ref=f1e1406]
+              - cell "16/09/2026" [ref=f1e1408]
+              - cell [ref=f1e1410]:
+                - generic [ref=f1e1411]:
+                  - button "Validar" [ref=f1e1413]
+                  - button "Eliminar" [ref=f1e1419]
+            - button "Ver factura (PROV181)" [ref=f1e1425] [cursor=pointer]:
+              - cell [ref=f1e1426]:
+                - img "Transferencia" [ref=f1e1433]
+              - cell "(PROV181)" [ref=f1e1437]
+              - cell "15/09/2026" [ref=f1e1439]
+              - cell "SPRING SAS" [ref=f1e1441]
+              - cell "546,480 €" [ref=f1e1443]
+              - cell "103,140 €" [ref=f1e1445]
+              - cell "25,380 €" [ref=f1e1447]
+              - cell "43,560 €" [ref=f1e1449]
+              - cell "631,440 €" [ref=f1e1451]
+              - cell "631,440 €" [ref=f1e1453]
+              - cell "16/09/2026" [ref=f1e1455]
+              - cell [ref=f1e1457]:
+                - generic [ref=f1e1458]:
+                  - button "Validar" [ref=f1e1460]
+                  - button "Eliminar" [ref=f1e1466]
+            - button "Ver factura (PROV186)" [ref=f1e1472] [cursor=pointer]:
+              - cell [ref=f1e1473]:
+                - img "Sin método" [ref=f1e1480]
+              - cell "(PROV186)" [ref=f1e1491]
+              - cell "15/09/2026" [ref=f1e1493]
+              - cell "Onna Digital" [ref=f1e1495]
+              - cell "64,980 €" [ref=f1e1497]
+              - cell "1,500 €" [ref=f1e1499]
+              - cell "0,000 €" [ref=f1e1501]
+              - cell "0,000 €" [ref=f1e1503]
+              - cell "66,480 €" [ref=f1e1505]
+              - cell "66,480 €" [ref=f1e1507]
+              - cell "15/09/2026" [ref=f1e1509]
+              - cell [ref=f1e1511]:
+                - generic [ref=f1e1512]:
+                  - button "Validar" [ref=f1e1514]
+                  - button "Eliminar" [ref=f1e1520]
+            - button "Ver factura (PROV162)" [ref=f1e1526] [cursor=pointer]:
+              - cell [ref=f1e1527]:
+                - img "Sin método" [ref=f1e1534]
+              - cell "(PROV162)" [ref=f1e1545]
+              - cell "15/09/2026" [ref=f1e1547]
+              - cell "PEDRO HOLGUIN" [ref=f1e1549]
+              - cell "1.021,540 €" [ref=f1e1551]
+              - cell "41,630 €" [ref=f1e1553]
+              - cell "5,222 €" [ref=f1e1555]
+              - cell "191,672 €" [ref=f1e1557]
+              - cell "1.063,170 €" [ref=f1e1559]
+              - cell "1.063,170 €" [ref=f1e1561]
+              - cell "15/09/2026" [ref=f1e1563]
+              - cell [ref=f1e1565]:
+                - generic [ref=f1e1566]:
+                  - button "Validar" [ref=f1e1568]
+                  - button "Eliminar" [ref=f1e1574]
+            - button "Ver factura IN2609-0056" [ref=f1e1580] [cursor=pointer]:
+              - cell [ref=f1e1581]:
+                - img "Sin método" [ref=f1e1587]
+              - cell "IN2609-0056" [ref=f1e1598]
+              - cell "15/09/2026" [ref=f1e1600]
+              - cell "Cliente 1" [ref=f1e1602]
+              - cell "1.040,000 €" [ref=f1e1604]
+              - cell "41,600 €" [ref=f1e1606]
+              - cell "0,000 €" [ref=f1e1608]
+              - cell "0,000 €" [ref=f1e1610]
+              - cell "1.081,600 €" [ref=f1e1612]
+              - cell "1.081,600 €" [ref=f1e1614]
+              - cell "15/09/2026" [ref=f1e1616]
+              - cell [ref=f1e1618]
+            - button "Ver factura IN2609-0061" [ref=f1e1619] [cursor=pointer]:
+              - cell [ref=f1e1620]:
+                - img "Sin método" [ref=f1e1625]
+              - cell "IN2609-0061" [ref=f1e1636]
+              - cell "15/09/2026" [ref=f1e1638]
+              - cell "Cliente 1" [ref=f1e1640]
+              - cell "1.040,000 €" [ref=f1e1642]
+              - cell "41,600 €" [ref=f1e1644]
+              - cell "0,000 €" [ref=f1e1646]
+              - cell "0,000 €" [ref=f1e1648]
+              - cell "1.081,600 €" [ref=f1e1650]
+              - cell "1.081,600 €" [ref=f1e1652]
+              - cell "15/09/2026" [ref=f1e1654]
+              - cell [ref=f1e1656]:
+                - generic [ref=f1e1657]:
+                  - button "Marcar pagada" [ref=f1e1659]
+                  - button "Más opciones" [ref=f1e1665]
+            - button "Ver factura (PROV202)" [ref=f1e1672] [cursor=pointer]:
+              - cell [ref=f1e1673]:
+                - img "Sin método" [ref=f1e1680]
+              - cell "(PROV202)" [ref=f1e1691]
+              - cell "15/09/2026" [ref=f1e1693]
+              - cell "PEDRO HOLGUIN" [ref=f1e1695]
+              - cell "545,980 €" [ref=f1e1697]
+              - cell "103,140 €" [ref=f1e1699]
+              - cell "25,380 €" [ref=f1e1701]
+              - cell "91,960 €" [ref=f1e1703]
+              - cell "582,540 €" [ref=f1e1705]
+              - cell "582,540 €" [ref=f1e1707]
+              - cell "15/09/2026" [ref=f1e1709]
+              - cell [ref=f1e1711]:
+                - generic [ref=f1e1712]:
+                  - button "Validar" [ref=f1e1714]
+                  - button "Eliminar" [ref=f1e1720]
+            - button "Ver factura (PROV184)" [ref=f1e1726] [cursor=pointer]:
+              - cell [ref=f1e1727]:
+                - img "Sin método" [ref=f1e1734]
+              - cell "(PROV184)" [ref=f1e1745]
+              - cell "15/09/2026" [ref=f1e1747]
+              - cell "PEDRO HOLGUIN" [ref=f1e1749]
+              - cell "545,980 €" [ref=f1e1751]
+              - cell "103,140 €" [ref=f1e1753]
+              - cell "25,378 €" [ref=f1e1755]
+              - cell "91,960 €" [ref=f1e1757]
+              - cell "649,120 €" [ref=f1e1759]
+              - cell "649,120 €" [ref=f1e1761]
+              - cell "15/09/2026" [ref=f1e1763]
+              - cell [ref=f1e1765]:
+                - generic [ref=f1e1766]:
+                  - button "Validar" [ref=f1e1768]
+                  - button "Eliminar" [ref=f1e1774]
+            - button "Ver factura (PROV135)" [ref=f1e1780] [cursor=pointer]:
+              - cell [ref=f1e1781]:
+                - img "Sin método" [ref=f1e1788]
+              - cell "(PROV135)" [ref=f1e1799]
+              - cell "15/09/2026" [ref=f1e1801]
+              - cell "PEDRO HOLGUIN" [ref=f1e1803]
+              - cell "0,000 €" [ref=f1e1805]
+              - cell "0,000 €" [ref=f1e1807]
+              - cell "0,000 €" [ref=f1e1809]
+              - cell "0,000 €" [ref=f1e1811]
+              - cell "0,000 €" [ref=f1e1813]
+              - cell "0,000 €" [ref=f1e1815]
+              - cell "15/10/2026" [ref=f1e1817]
+              - cell [ref=f1e1819]:
+                - generic [ref=f1e1820]:
+                  - button "Validar" [ref=f1e1822]
+                  - button "Eliminar" [ref=f1e1828]
+            - button "Ver factura (PROV134)" [ref=f1e1834] [cursor=pointer]:
+              - cell [ref=f1e1835]:
+                - img "Sin método" [ref=f1e1842]
+              - cell "(PROV134)" [ref=f1e1853]
+              - cell "15/09/2026" [ref=f1e1855]
+              - cell "PEDRO HOLGUIN" [ref=f1e1857]
+              - cell "0,000 €" [ref=f1e1859]
+              - cell "0,000 €" [ref=f1e1861]
+              - cell "0,000 €" [ref=f1e1863]
+              - cell "0,000 €" [ref=f1e1865]
+              - cell "0,000 €" [ref=f1e1867]
+              - cell "0,000 €" [ref=f1e1869]
+              - cell "15/09/2026" [ref=f1e1871]
+              - cell [ref=f1e1873]:
+                - generic [ref=f1e1874]:
+                  - button "Validar" [ref=f1e1876]
+                  - button "Eliminar" [ref=f1e1882]
+            - button "Ver factura (PROV133)" [ref=f1e1888] [cursor=pointer]:
+              - cell [ref=f1e1889]:
+                - img "Domiciliación" [ref=f1e1896]
+              - cell "(PROV133)" [ref=f1e1904]
+              - cell "15/09/2026" [ref=f1e1906]
+              - cell "PEDRO HOLGUIN" [ref=f1e1908]
+              - cell "1,000 €" [ref=f1e1910]
+              - cell "0,000 €" [ref=f1e1912]
+              - cell "0,000 €" [ref=f1e1914]
+              - cell "0,000 €" [ref=f1e1916]
+              - cell "1,000 €" [ref=f1e1918]
+              - cell "1,000 €" [ref=f1e1920]
+              - cell "15/09/2026" [ref=f1e1922]
+              - cell [ref=f1e1924]:
+                - generic [ref=f1e1925]:
+                  - button "Validar" [ref=f1e1927]
+                  - button "Eliminar" [ref=f1e1933]
+            - button "Ver factura (PROV132)" [ref=f1e1939] [cursor=pointer]:
+              - cell [ref=f1e1940]:
+                - img "Tarjeta" [ref=f1e1947]
+              - cell "(PROV132)" [ref=f1e1951]
+              - cell "15/09/2026" [ref=f1e1953]
+              - cell "PEDRO HOLGUIN" [ref=f1e1955]
+              - cell "0,000 €" [ref=f1e1957]
+              - cell "0,000 €" [ref=f1e1959]
+              - cell "0,000 €" [ref=f1e1961]
+              - cell "0,000 €" [ref=f1e1963]
+              - cell "0,000 €" [ref=f1e1965]
+              - cell "0,000 €" [ref=f1e1967]
+              - cell "15/09/2026" [ref=f1e1969]
+              - cell [ref=f1e1971]:
+                - generic [ref=f1e1972]:
+                  - button "Validar" [ref=f1e1974]
+                  - button "Eliminar" [ref=f1e1980]
+            - button "Ver factura (PROV131)" [ref=f1e1986] [cursor=pointer]:
+              - cell [ref=f1e1987]:
+                - img "Cheque" [ref=f1e1994]
+              - cell "(PROV131)" [ref=f1e1999]
+              - cell "15/09/2026" [ref=f1e2001]
+              - cell "PEDRO HOLGUIN" [ref=f1e2003]
+              - cell "0,000 €" [ref=f1e2005]
+              - cell "0,000 €" [ref=f1e2007]
+              - cell "0,000 €" [ref=f1e2009]
+              - cell "0,000 €" [ref=f1e2011]
+              - cell "0,000 €" [ref=f1e2013]
+              - cell "0,000 €" [ref=f1e2015]
+              - cell "15/09/2026" [ref=f1e2017]
+              - cell [ref=f1e2019]:
+                - generic [ref=f1e2020]:
+                  - button "Validar" [ref=f1e2022]
+                  - button "Eliminar" [ref=f1e2028]
+            - button "Ver factura IN2609-0058" [ref=f1e2034] [cursor=pointer]:
+              - cell [ref=f1e2035]:
+                - img "Sin método" [ref=f1e2041]
+              - cell "IN2609-0058" [ref=f1e2052]
+              - cell "15/09/2026" [ref=f1e2054]
+              - cell "Cliente 1" [ref=f1e2056]
+              - cell "1.040,000 €" [ref=f1e2058]
+              - cell "41,600 €" [ref=f1e2060]
+              - cell "0,000 €" [ref=f1e2062]
+              - cell "0,000 €" [ref=f1e2064]
+              - cell "1.081,600 €" [ref=f1e2066]
+              - cell "1.081,600 €" [ref=f1e2068]
+              - cell "15/09/2026" [ref=f1e2070]
+              - cell [ref=f1e2072]
+            - button "Ver factura IN2609-0065" [ref=f1e2073] [cursor=pointer]:
+              - cell [ref=f1e2074]:
+                - img "Sin método" [ref=f1e2079]
+              - cell "IN2609-0065" [ref=f1e2090]
+              - cell "15/09/2026" [ref=f1e2092]
+              - cell "PEDRO HOLGUIN" [ref=f1e2094]
+              - cell "1.609,520 €" [ref=f1e2096]
+              - cell "137,530 €" [ref=f1e2098]
+              - cell "29,303 €" [ref=f1e2100]
+              - cell "267,041 €" [ref=f1e2102]
+              - cell "1.747,050 €" [ref=f1e2104]
+              - cell "1.747,050 €" [ref=f1e2106]
+              - cell "15/09/2026" [ref=f1e2108]
+              - cell [ref=f1e2110]:
+                - generic [ref=f1e2111]:
+                  - button "Marcar pagada" [ref=f1e2113]
+                  - button "Más opciones" [ref=f1e2119]
+            - button "Ver factura IN2609-0059" [ref=f1e2126] [cursor=pointer]:
+              - cell [ref=f1e2127]:
+                - img "Sin método" [ref=f1e2134]
+              - cell "IN2609-0059" [ref=f1e2145]
+              - cell "15/09/2026" [ref=f1e2147]
+              - cell "Cliente 1" [ref=f1e2149]
+              - cell "1.040,000 €" [ref=f1e2151]
+              - cell "41,600 €" [ref=f1e2153]
+              - cell "0,000 €" [ref=f1e2155]
+              - cell "0,000 €" [ref=f1e2157]
+              - cell "1.081,600 €" [ref=f1e2159]
+              - cell "1.081,600 €" [ref=f1e2161]
+              - cell "15/09/2026" [ref=f1e2163]
+              - cell [ref=f1e2165]:
+                - generic [ref=f1e2166]:
+                  - button "Validar" [ref=f1e2168]
+                  - button "Eliminar" [ref=f1e2174]
+            - button "Ver factura IN2609-0062" [ref=f1e2180] [cursor=pointer]:
+              - cell [ref=f1e2181]:
+                - img "Sin método" [ref=f1e2186]
+              - cell "IN2609-0062" [ref=f1e2197]
+              - cell "15/09/2026" [ref=f1e2199]
+              - cell "Cliente 1" [ref=f1e2201]
+              - cell "1.040,000 €" [ref=f1e2203]
+              - cell "41,600 €" [ref=f1e2205]
+              - cell "0,000 €" [ref=f1e2207]
+              - cell "0,000 €" [ref=f1e2209]
+              - cell "1.081,600 €" [ref=f1e2211]
+              - cell "1.081,600 €" [ref=f1e2213]
+              - cell "15/09/2026" [ref=f1e2215]
+              - cell [ref=f1e2217]:
+                - generic [ref=f1e2218]:
+                  - button "Marcar pagada" [ref=f1e2220]
+                  - button "Más opciones" [ref=f1e2226]
+            - button "Ver factura (PROV173)" [ref=f1e2233] [cursor=pointer]:
+              - cell [ref=f1e2234]:
+                - img "Sin método" [ref=f1e2241]
+              - cell "(PROV173)" [ref=f1e2252]
+              - cell "15/09/2026" [ref=f1e2254]
+              - cell "Cliente 1" [ref=f1e2256]
+              - cell "1.040,000 €" [ref=f1e2258]
+              - cell "41,600 €" [ref=f1e2260]
+              - cell "0,000 €" [ref=f1e2262]
+              - cell "0,000 €" [ref=f1e2264]
+              - cell "1.081,600 €" [ref=f1e2266]
+              - cell "1.081,600 €" [ref=f1e2268]
+              - cell "15/09/2026" [ref=f1e2270]
+              - cell [ref=f1e2272]:
+                - generic [ref=f1e2273]:
+                  - button "Validar" [ref=f1e2275]
+                  - button "Eliminar" [ref=f1e2281]
+            - button "Ver factura (PROV172)" [ref=f1e2287] [cursor=pointer]:
+              - cell [ref=f1e2288]:
+                - img "Sin método" [ref=f1e2295]
+              - cell "(PROV172)" [ref=f1e2306]
+              - cell "15/09/2026" [ref=f1e2308]
+              - cell "Cliente 1" [ref=f1e2310]
+              - cell "1.040,000 €" [ref=f1e2312]
+              - cell "41,600 €" [ref=f1e2314]
+              - cell "0,000 €" [ref=f1e2316]
+              - cell "0,000 €" [ref=f1e2318]
+              - cell "1.081,600 €" [ref=f1e2320]
+              - cell "1.081,600 €" [ref=f1e2322]
+              - cell "15/09/2026" [ref=f1e2324]
+              - cell [ref=f1e2326]:
+                - generic [ref=f1e2327]:
+                  - button "Validar" [ref=f1e2329]
+                  - button "Eliminar" [ref=f1e2335]
+            - button "Ver factura IN2609-0060" [ref=f1e2341] [cursor=pointer]:
+              - cell [ref=f1e2342]:
+                - img "Sin método" [ref=f1e2347]
+              - cell "IN2609-0060" [ref=f1e2358]
+              - cell "15/09/2026" [ref=f1e2360]
+              - cell "Cliente 1" [ref=f1e2362]
+              - cell "1.040,000 €" [ref=f1e2364]
+              - cell "41,600 €" [ref=f1e2366]
+              - cell "0,000 €" [ref=f1e2368]
+              - cell "0,000 €" [ref=f1e2370]
+              - cell "1.081,600 €" [ref=f1e2372]
+              - cell "1.081,600 €" [ref=f1e2374]
+              - cell "15/09/2026" [ref=f1e2376]
+              - cell [ref=f1e2378]:
+                - generic [ref=f1e2379]:
+                  - button "Marcar pagada" [ref=f1e2381]
+                  - button "Más opciones" [ref=f1e2387]
+            - button "Ver factura IR2609-0003" [ref=f1e2394] [cursor=pointer]:
+              - cell [ref=f1e2395]:
+                - img "Sin método" [ref=f1e2400]
+              - cell "IR2609-0003" [ref=f1e2411]
+              - cell "15/09/2026" [ref=f1e2413]
+              - cell "Cliente 1" [ref=f1e2415]
+              - cell "120,000 €" [ref=f1e2417]
+              - cell "0,000 €" [ref=f1e2419]
+              - cell "0,000 €" [ref=f1e2421]
+              - cell "0,000 €" [ref=f1e2423]
+              - cell "120,000 €" [ref=f1e2425]
+              - cell "120,000 €" [ref=f1e2427]
+              - cell "15/09/2026" [ref=f1e2429]
+              - cell [ref=f1e2431]:
+                - generic [ref=f1e2432]:
+                  - button "Marcar pagada" [ref=f1e2434]
+                  - button "Más opciones" [ref=f1e2440]
+            - button "Ver factura IN2609-0057" [ref=f1e2447] [cursor=pointer]:
+              - cell [ref=f1e2448]:
+                - img "Transferencia" [ref=f1e2453]
+              - cell "IN2609-0057" [ref=f1e2457]
+              - cell "15/09/2026" [ref=f1e2459]
+              - cell "PEDRO HOLGUIN" [ref=f1e2461]
+              - cell "1.074,980 €" [ref=f1e2463]
+              - cell "43,100 €" [ref=f1e2465]
+              - cell "5,410 €" [ref=f1e2467]
+              - cell "197,600 €" [ref=f1e2469]
+              - cell "1.118,080 €" [ref=f1e2471]
+              - cell "1.118,080 €" [ref=f1e2473]
+              - cell "16/09/2026" [ref=f1e2475]
+              - cell [ref=f1e2477]:
+                - generic [ref=f1e2478]:
+                  - button "Marcar pagada" [ref=f1e2480]
+                  - button "Más opciones" [ref=f1e2486]
+            - button "Ver factura (PROV180)" [ref=f1e2493] [cursor=pointer]:
+              - cell [ref=f1e2494]:
+                - img "Sin método" [ref=f1e2501]
+              - cell "(PROV180)" [ref=f1e2512]
+              - cell "15/09/2026" [ref=f1e2514]
+              - cell "SPRING SAS" [ref=f1e2516]
+              - cell "2.015,240 €" [ref=f1e2518]
+              - cell "208,590 €" [ref=f1e2520]
+              - cell "5,306 €" [ref=f1e2522]
+              - cell "36,000 €" [ref=f1e2524]
+              - cell "2.259,830 €" [ref=f1e2526]
+              - cell "2.259,830 €" [ref=f1e2528]
+              - cell "15/09/2026" [ref=f1e2530]
+              - cell [ref=f1e2532]:
+                - generic [ref=f1e2533]:
+                  - button "Validar" [ref=f1e2535]
+                  - button "Eliminar" [ref=f1e2541]
+            - button "Ver factura IN2609-0064" [ref=f1e2547] [cursor=pointer]:
+              - cell [ref=f1e2548]:
+                - img "Sin método" [ref=f1e2553]
+              - cell "IN2609-0064" [ref=f1e2564]
+              - cell "15/09/2026" [ref=f1e2566]
+              - cell "SPRING SAS" [ref=f1e2568]
+              - cell "1.101,980 €" [ref=f1e2570]
+              - cell "43,100 €" [ref=f1e2572]
+              - cell "5,410 €" [ref=f1e2574]
+              - cell "93,600 €" [ref=f1e2576]
+              - cell "1.145,080 €" [ref=f1e2578]
+              - cell "995,080 €" [ref=f1e2580]
+              - cell "15/09/2026" [ref=f1e2582]
+              - cell [ref=f1e2584]:
+                - generic [ref=f1e2585]:
+                  - button "Marcar pagada" [ref=f1e2587]
+                  - button "Más opciones" [ref=f1e2593]
+            - button "Ver factura IN2609-0063" [ref=f1e2600] [cursor=pointer]:
+              - cell [ref=f1e2601]:
+                - img "Transferencia" [ref=f1e2606]
+              - cell "IN2609-0063" [ref=f1e2610]
+              - cell "15/09/2026" [ref=f1e2612]
+              - cell "SPRING SAS" [ref=f1e2614]
+              - cell "133,780 €" [ref=f1e2616]
+              - cell "22,500 €" [ref=f1e2618]
+              - cell "5,410 €" [ref=f1e2620]
+              - cell "9,000 €" [ref=f1e2622]
+              - cell "156,280 €" [ref=f1e2624]
+              - cell "0,000 €" [ref=f1e2626]
+              - cell "15/10/2026" [ref=f1e2628]
+              - cell [ref=f1e2630]:
+                - button "Más opciones" [ref=f1e2633]
+            - button "Ver factura (PROV177)" [ref=f1e2640] [cursor=pointer]:
+              - cell [ref=f1e2641]:
+                - img "Transferencia" [ref=f1e2648]
+              - cell "(PROV177)" [ref=f1e2652]
+              - cell "15/09/2026" [ref=f1e2654]
+              - cell "PEDRO HOLGUIN" [ref=f1e2656]
+              - cell "1.080,930 €" [ref=f1e2658]
+              - cell "42,190 €" [ref=f1e2660]
+              - cell "5,300 €" [ref=f1e2662]
+              - cell "193,650 €" [ref=f1e2664]
+              - cell "934,770 €" [ref=f1e2666]
+              - cell "934,770 €" [ref=f1e2668]
+              - cell "16/09/2026" [ref=f1e2670]
+              - cell [ref=f1e2672]:
+                - generic [ref=f1e2673]:
+                  - button "Validar" [ref=f1e2675]
+                  - button "Eliminar" [ref=f1e2681]
+            - button "Ver factura (PROV176)" [ref=f1e2687] [cursor=pointer]:
+              - cell [ref=f1e2688]:
+                - img "Sin método" [ref=f1e2695]
+              - cell "(PROV176)" [ref=f1e2706]
+              - cell "15/09/2026" [ref=f1e2708]
+              - cell "Marta" [ref=f1e2710]
+              - cell "484,000 €" [ref=f1e2712]
+              - cell "101,640 €" [ref=f1e2714]
+              - cell "0,000 €" [ref=f1e2716]
+              - cell "0,000 €" [ref=f1e2718]
+              - cell "585,640 €" [ref=f1e2720]
+              - cell "585,640 €" [ref=f1e2722]
+              - cell "15/09/2026" [ref=f1e2724]
+              - cell [ref=f1e2726]:
+                - generic [ref=f1e2727]:
+                  - button "Validar" [ref=f1e2729]
+                  - button "Eliminar" [ref=f1e2735]
+            - button "Ver factura (PROV175)" [ref=f1e2741] [cursor=pointer]:
+              - cell [ref=f1e2742]:
+                - img "Sin método" [ref=f1e2749]
+              - cell "(PROV175)" [ref=f1e2760]
+              - cell "15/09/2026" [ref=f1e2762]
+              - cell "Cliente 1" [ref=f1e2764]
+              - cell "1.040,000 €" [ref=f1e2766]
+              - cell "41,600 €" [ref=f1e2768]
+              - cell "0,000 €" [ref=f1e2770]
+              - cell "0,000 €" [ref=f1e2772]
+              - cell "1.081,600 €" [ref=f1e2774]
+              - cell "1.081,600 €" [ref=f1e2776]
+              - cell "15/09/2026" [ref=f1e2778]
+              - cell [ref=f1e2780]:
+                - generic [ref=f1e2781]:
+                  - button "Validar" [ref=f1e2783]
+                  - button "Eliminar" [ref=f1e2789]
+        - group [ref=f1e2796]:
+          - generic [ref=f1e2798]:
+            - generic [ref=f1e2799]:
+              - generic [aria-hidden] [ref=f1e2800]: "Items per page:"
+              - combobox "Items per page:" [ref=f1e2805] [cursor=pointer]:
+                - generic [ref=f1e2806]: "50"
+            - generic [ref=f1e2814]:
+              - status [ref=f1e2815]: 1 – 50 of 119
+              - button "First page" [disabled] [ref=f1e2816]
+              - button "Previous page" [disabled] [ref=f1e2821]
+              - button "Next page" [ref=f1e2826] [cursor=pointer]
+              - button "Last page" [ref=f1e2831] [cursor=pointer]

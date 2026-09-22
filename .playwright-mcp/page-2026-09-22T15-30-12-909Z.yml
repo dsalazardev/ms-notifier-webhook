@@ -1,0 +1,80 @@
+- generic [ref=e3]:
+  - generic [ref=e7]:
+    - generic [ref=e9]:
+      - img "Doligestión" [ref=e10]
+      - generic [ref=e11]: Doligestión
+    - separator [ref=e12]
+    - navigation [ref=e14]:
+      - link "Inicio" [ref=e15] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e20]: Compras
+      - link "Proveedores" [ref=e21] [cursor=pointer]:
+        - /url: /suppliers
+      - link "Facturas de compra" [ref=e27] [cursor=pointer]:
+        - /url: /supplier-invoices
+      - generic [ref=e32]: Ventas
+      - link "Clientes" [ref=e33] [cursor=pointer]:
+        - /url: /clients
+      - link "Presupuestos" [ref=e39] [cursor=pointer]:
+        - /url: /proposals
+      - link "Contratos" [ref=e44] [cursor=pointer]:
+        - /url: /contracts
+      - link "Pedidos" [ref=e50] [cursor=pointer]:
+        - /url: /orders
+      - link "Facturas" [ref=e56] [cursor=pointer]:
+        - /url: /invoices
+      - link "TPV" [ref=e61] [cursor=pointer]:
+        - /url: https://dolibarr.doligestion2.doligestion.es/takepos/index.php
+      - link "Modelos IVA" [ref=e65] [cursor=pointer]:
+        - /url: /tax-models
+      - generic [ref=e70]: Gestión Comercial
+      - link "Productos" [ref=e71] [cursor=pointer]:
+        - /url: /products
+      - link "Servicios" [ref=e76] [cursor=pointer]:
+        - /url: /services
+      - link "Almacenes" [ref=e89] [cursor=pointer]:
+        - /url: /warehouses
+      - link "Listas de materiales" [ref=e94] [cursor=pointer]:
+        - /url: /boms
+      - link "Cuentas bancarias" [ref=e100] [cursor=pointer]:
+        - /url: /banks
+      - generic [ref=e104]: Proyectos
+      - link "Proyectos" [ref=e105] [cursor=pointer]:
+        - /url: /projects
+      - generic [ref=e110]: Recursos Humanos
+      - link "Empleados" [ref=e111] [cursor=pointer]:
+        - /url: /employees
+      - link "Jornadas" [ref=e118] [cursor=pointer]:
+        - /url: /workdays
+      - link "Fichajes modificados" [ref=e124] [cursor=pointer]:
+        - /url: /workdays/modified
+      - link "Resumen semanal" [ref=e130] [cursor=pointer]:
+        - /url: /weekly-summary
+      - generic [ref=e134]: Configuración
+      - generic [ref=e135] [cursor=pointer]: Contraer menú
+      - generic [ref=e140] [cursor=pointer]: Todos los proyectos
+      - generic [ref=e147] [cursor=pointer]:
+        - generic [ref=e148]: A
+        - generic [ref=e149]: admin
+  - generic [ref=e158]:
+    - generic [ref=e159]:
+      - img "Doligestión" [ref=e160]
+      - generic [ref=e161]: Doligestión
+    - generic [ref=e164]:
+      - generic [ref=e165]: 10:30:12
+      - generic [ref=e166]: 22/09/2026
+    - generic [ref=e168]:
+      - generic [ref=e172]:
+        - generic: Usuario *
+        - textbox "Usuario *" [ref=e180]:
+          - /placeholder: Introduce tu usuario
+          - text: admin
+      - generic [ref=e184]:
+        - generic: Contraseña *
+        - textbox "Contraseña *" [ref=e192]:
+          - /placeholder: Introduce tu contraseña
+          - text: admin
+        - button "Ver contraseña" [ref=e194] [cursor=pointer]
+      - button "Iniciar sesión" [ref=e200] [cursor=pointer]
+      - button "¿Has olvidado tu contraseña?" [ref=e205]
+    - generic [ref=e209]: v0.1.187

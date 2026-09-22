@@ -1,24 +1,25 @@
-# Variables de entorno y secretos
+# Secretos y entorno
 .env
 .env.*
 *.pem
 *.key
 
-# Entornos virtuales locales (Acelera el build context en Render)
+# Entornos virtuales locales (acelera el build context en Render)
 .venv/
 venv/
 env/
 
-# Caché de compilación de Python
+# Cachés de Python
 __pycache__/
 *.py[cod]
 *$py.class
 .pytest_cache/
+.ruff_cache/
 
-# Caché del gestor uv
+# Caché de uv
 .uv-cache/
 
-# Configuraciones de IDEs (VS Code, PyCharm, etc.)
+# IDEs y editores
 .vscode/
 .idea/
 *.swp
@@ -28,7 +29,19 @@ __pycache__/
 .git/
 .gitignore
 
-# Logs y OS
+# Tooling de agentes / OpenSpec (no entran a la imagen)
+.claude/
+.opencode/
+.github/
+openspec/
+AGENTS.md
+
+# Tests y utilidades locales (no van a producción)
+tests/
+conftest.py
+.playwright-mcp/
+
+# Logs y sistema operativo
 *.log
 .DS_Store
 Thumbs.db
