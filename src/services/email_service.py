@@ -1,5 +1,5 @@
 import base64
-from azure.communication.email import EmailClient
+from azure.communication.email.aio import EmailClient
 from src.core.config import settings
 from src.core.exceptions import EmailDeliveryError
 
@@ -16,7 +16,7 @@ class AsyncEmailService:
             },
             "content": {
                 "subject": "Aquí tienes tu documento y el siguiente paso",
-                "plainText": f"""Hola {to_email},
+                "plainText": f"""Hola {to_email} solicitaste información sobre {need}.,
 
 Gracias por tu interés. Adjunto encontrarás el PDF que solicitaste.
 
