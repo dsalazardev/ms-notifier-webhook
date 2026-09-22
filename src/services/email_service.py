@@ -1,5 +1,5 @@
 import base64
-from azure.communication.email.aio import EmailClient
+from azure.communication.email import EmailClient
 from src.core.config import settings
 from src.core.exceptions import EmailDeliveryError
 
