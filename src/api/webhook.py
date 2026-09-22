@@ -1,11 +1,12 @@
 import logging
 
-from fastapi import APIRouter, BackgroundTasks
+from fastapi import APIRouter, BackgroundTasks, Request, Response
 from fastapi.responses import JSONResponse
 from limits import parse as parse_limit
 
 from src.core.config import settings
 from src.core.exceptions import NotificationServiceError
+from src.core.rate_limit import limiter
 from src.core.retry import run_with_retries
 from src.models.lead import LeadCreate
 from src.services.drive_service import AsyncDriveService
@@ -65,8 +66,18 @@ async def _send_failure_alert(lead: LeadCreate, phase: str, error: Exception) ->
         logger.critical("alert.send_failed lead=%s phase=%s error=%s", lead.email, phase, e)
 
 
+def _lead_rate_limit() -> str:
+    return settings.RATE_LIMIT_LEAD
+
+
 @router.post("/lead", status_code=202)
-async def handle_lead(lead: LeadCreate, background_tasks: BackgroundTasks):
+@limiter.limit(_lead_rate_limit)
+async def handle_lead(
+    request: Request,
+    response: Response,
+    lead: LeadCreate,
+    background_tasks: BackgroundTasks,
+):
     """
     Endpoint del Webhook que recibe los datos de la landing page.
     Retorna 202 (Accepted) inmediatamente y procesa en background.

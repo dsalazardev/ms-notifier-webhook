@@ -8,8 +8,6 @@ class Settings(BaseSettings):
     GOOGLE_CREDENTIALS_JSON: SecretStr
     DRIVE_FILE_ID: str
 
-    AZURE_COMMUNICATION_ENDPOINT: str
-    AZURE_COMMUNICATION_KEY: SecretStr
     AZURE_EMAIL_CONNECTION_STRING: SecretStr
 
     FROM_EMAIL: str
@@ -23,7 +21,9 @@ class Settings(BaseSettings):
     MAX_PDF_SIZE_MB: int = 10
     LOG_LEVEL: str = "INFO"
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(
+        env_file=".env", env_file_encoding="utf-8", extra="ignore"
+    )
 
     @property
     def google_creds_dict(self) -> dict:

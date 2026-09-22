@@ -24,9 +24,9 @@
 
 ## 4. Grupo C — Seguridad
 
-- [ ] 4.1 Limpiar `Settings`: retirar `AZURE_COMMUNICATION_ENDPOINT`/`AZURE_COMMUNICATION_KEY`, agregar `ALERT_EMAIL`, `RATE_LIMIT_LEAD`, `MAX_PDF_SIZE_MB`, `LOG_LEVEL` y fijar `extra="ignore"`; verificar con el test de 6.2 (app arranca con variables retiradas presentes) y con `.env.example` actualizado (nuevas documentadas, retiradas como legado).
-- [ ] 4.2 Añadir rate limiting con `slowapi` a `/lead` (key por IP, límite leído en runtime) con handler de `429` y header `Retry-After`; verificar con el test de 6.4 (exceder límite responde 429 y no agenda pipeline).
-- [ ] 4.3 Eximir `/health` y `/health/ready` del límite y comprobar que el límite es configurable (`RATE_LIMIT_LEAD=2/minute` cambia el comportamiento); verificar con los tests de 6.4.
+- [x] 4.1 Limpiar `Settings`: retirar `AZURE_COMMUNICATION_ENDPOINT`/`AZURE_COMMUNICATION_KEY`, agregar `ALERT_EMAIL`, `RATE_LIMIT_LEAD`, `MAX_PDF_SIZE_MB`, `LOG_LEVEL` y fijar `extra="ignore"`; verificar con el test de 6.2 (app arranca con variables retiradas presentes) y con `.env.example` actualizado (nuevas documentadas, retiradas como legado).
+- [x] 4.2 Añadir rate limiting con `slowapi` a `/lead` (key por IP, límite leído en runtime) con handler de `429` y header `Retry-After`; verificar con el test de 6.4 (exceder límite responde 429 y no agenda pipeline).
+- [x] 4.3 Eximir `/health` y `/health/ready` del límite y comprobar que el límite es configurable (`RATE_LIMIT_LEAD=2/minute` cambia el comportamiento); verificar con los tests de 6.4.
 - [ ] 4.4 Documentar el caveat de IP tras proxy (`--proxy-headers`/`FORWARDED_ALLOW_IPS`) en `README.md` y `AGENTS.md`; verificar que la nota existe.
 
 ## 5. Grupo D — Limpieza y mantenibilidad
