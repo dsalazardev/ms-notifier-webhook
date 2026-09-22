@@ -5,7 +5,10 @@ from slowapi.errors import RateLimitExceeded
 
 from src.api.webhook import router as webhook_router
 from src.core.config import settings
+from src.core.logging import configure_logging
 from src.core.rate_limit import limiter
+
+configure_logging()
 
 app = FastAPI(
     title="ms-notifier-webhook",

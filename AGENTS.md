@@ -38,11 +38,11 @@ There are several service-name variants that should not be silently normalized d
 
 - Repository: `ms-notifier-webhook`
 - Python project package: `ms-notifier-webhook`
-- FastAPI title: `ms-notifications`
+- FastAPI title: `ms-notifier-webhook` (unificado en el change `ms-notifier-hardening`)
 - FastAPI description: `Microservicio asíncrono para despachar recursos y correos a leads.`
-- Health endpoint service field: `ms-notifications`
+- Health endpoint service field: `ms-notifier-webhook` (unificado en el change `ms-notifier-hardening`)
 
-Treat the existing names as source-of-truth until a deliberate naming change is made.
+El naming quedó unificado en `ms-notifier-webhook` por el change `ms-notifier-hardening`.
 
 ---
 
@@ -80,13 +80,17 @@ src/
 ├── .gitignore
 ├── .dockerignore
 ├── Dockerfile
+├── README.md
+├── conftest.py
 ├── pyproject.toml
 ├── uv.lock
-├── .idea/
+├── tests/
 ├── .claude/
 ├── .github/
 └── .opencode/
 ```
+
+`.idea/` ya no está trackeado (change `ms-notifier-hardening`) y está en `.gitignore`.
 
 ### OpenSpec / coding-agent support
 
@@ -148,19 +152,15 @@ Do not infer missing artifacts from common Python project conventions.
 
 - `httpx`: declared `>=0.28.0`, locked `0.28.1`; used for Google Drive HTTP download.
 - `google-auth`: declared `>=2.35.0`, locked `2.58.0`; used for service-account credentials and token refresh.
+- `slowapi`: declared `>=0.1.9`; used for per-IP rate limiting on `/lead`.
 - `azure-communication-email`: declared `>=1.1.0`, locked `1.1.0`; used for asynchronous email sending.
-- `azure-core`: declared `>=1.41.0`, locked `1.41.0`; no direct application import was found, but it is part of the Azure SDK dependency set.
+- `azure-core`: no longer a direct declaration; arrives transitively with the Azure SDK.
 
 ### Declared dependencies with no direct source-code usage found
 
-The current source does not directly import/reference:
+Ya no aplica: `aiosmtplib`, `aiohttp` y `azure-core` (declaración explícita) fueron retiradas de `pyproject.toml` en el change `ms-notifier-hardening`. `azure-core` permanece como dependencia transitiva del SDK de Azure.
 
-- `aiosmtplib`, locked `5.1.3`
-- `aiohttp`, locked `3.14.3`
-
-Their presence is compatible with historical evolution of the project, but they should not be treated as active providers/infrastructure without new evidence.
-
-The commit history explicitly records a migration from SMTP to Azure Communication Services (`d108e6da9880637af1a4af0f91aeae3e5338821a`). Therefore, do not reintroduce SMTP behavior merely because `aiosmtplib` remains in the dependency files.
+The commit history explicitly records a migration from SMTP to Azure Communication Services (`d108e6da9880637af1a4af0f91aeae3e5338821a`). Do not reintroduce SMTP behavior.
 
 ---
 
@@ -220,9 +220,9 @@ There is no separate domain layer, repository layer, controller class hierarchy,
 1. FastAPI receives the request at `/api/v1/lead`.
 2. FastAPI/Pydantic validates the JSON body against `LeadCreate`.
 3. `handle_lead()` schedules `process_lead_pipeline(lead)` using `BackgroundTasks`.
-4. The endpoint returns a JSON acceptance payload immediately.
+4. The endpoint returns `202 Accepted` with a JSON acceptance payload immediately.
 5. The background task logs the start of processing.
-6. `AsyncDriveService.get_pdf_bytes(settings.DRIVE_FILE_ID)` obtains a Google access token and downloads the configured Drive file.
+6. `AsyncDriveService.get_pdf_bytes(settings.DRIVE_FILE_ID)` obtains a Google access token (refreshed only when invalid, off the event loop) and downloads the configured Drive file; the content is validated (`%PDF-` signature, size limit) and transient failures are retried with backoff by the orchestrator.
 7. `AsyncEmailService.send_lead_email()` creates an email with:
    - sender from `FROM_EMAIL`;
    - recipient from `lead.email`;
@@ -230,13 +230,17 @@ There is no separate domain layer, repository layer, controller class hierarchy,
    - `BOOKING_URL` included in the body;
    - the downloaded bytes attached as `Documento_Especial.pdf` with content type `application/pdf`.
 8. Azure Email is invoked using `EmailClient.from_connection_string(...)` and `begin_send(...)`.
-9. The pipeline logs success, or catches and logs controlled/uncontrolled errors.
+9. The pipeline logs success with lead and phase; on definitive failure it sends an alert email to `ALERT_EMAIL` (fallback `FROM_EMAIL`) and never exposes errors to the HTTP caller.
 
 ### `GET /api/v1/health`
 
-Returns a simple JSON health response with `status: ok` and service name `ms-notifications`.
+Returns a simple JSON health response with `status: ok` and service name `ms-notifier-webhook`.
 
-The code comment states that this endpoint is intended to keep the service alive through a Render cron-job ping. No Render-specific deployment configuration exists in the tracked repository, so that comment is the only repository evidence for the intended use.
+### `GET /api/v1/health/ready`
+
+Configuration-only readiness (no external calls): checks Google credentials JSON parseability, `DRIVE_FILE_ID`, Azure connection string, `CORS_ORIGINS`, `MAX_PDF_SIZE_MB` and `RATE_LIMIT_LEAD`. Responds 200 `ready` or 503 `not_ready` with a `checks` map.
+
+The code comment on `/health` states that this endpoint is intended to keep the service alive through a Render cron-job ping. No Render-specific deployment configuration exists in the tracked repository, so that comment is the only repository evidence for the intended use.
 
 ---
 
@@ -251,24 +255,19 @@ Responsibilities:
 - Configures CORS.
 - Mounts the webhook router under `/api/v1`.
 
-Observed CORS configuration:
+Observed CORS configuration (post `bfd65f3`, hardened in `ms-notifier-hardening`):
 
 ```python
-origins = [
-    "http://localhost:4321",
-    "*"
-]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 ```
 
-with:
-
-```python
-allow_credentials=True
-allow_methods=["*"]
-allow_headers=["*"]
-```
-
-This is intentionally documented here because changing CORS can alter frontend integration behavior.
+`CORS_ORIGINS` is a required JSON-array environment variable (allowlist). There is no wildcard. Changing CORS can alter frontend integration behavior.
 
 ### `src/api/webhook.py`
 
@@ -309,7 +308,7 @@ FROM_EMAIL
 BOOKING_URL
 ```
 
-`GOOGLE_CREDENTIALS_JSON` and `AZURE_COMMUNICATION_KEY` are `SecretStr` values.
+`GOOGLE_CREDENTIALS_JSON` and `AZURE_EMAIL_CONNECTION_STRING` are `SecretStr` values.
 
 Settings are loaded from `.env` using UTF-8 encoding.
 
@@ -391,8 +390,10 @@ There is no separate configuration file or runtime configuration class elsewhere
 |---|---|---|
 | `GOOGLE_CREDENTIALS_JSON` | JSON service-account credential used to authenticate against Google APIs. | Required: field has no default. |
 | `DRIVE_FILE_ID` | Google Drive file identifier downloaded for every lead. | Required: field has no default. |
-| `AZURE_COMMUNICATION_ENDPOINT` | Declared Azure Communication Services setting. | Required by `Settings`, but no direct runtime read was found in the current email service. |
-| `AZURE_COMMUNICATION_KEY` | Declared secret Azure Communication Services setting. | Required by `Settings`, but no direct runtime read was found in the current email service. |
+| `ALERT_EMAIL` | Optional alert recipient on definitive pipeline failure. | Optional; falls back to `FROM_EMAIL`. |
+| `RATE_LIMIT_LEAD` | Per-IP rate limit for `/lead` (limits format). | Optional; default `5/minute`. |
+| `MAX_PDF_SIZE_MB` | Maximum attached PDF size in MB. | Optional; default `10`. |
+| `LOG_LEVEL` | Root logging level. | Optional; default `INFO`. |
 | `AZURE_EMAIL_CONNECTION_STRING` | Connection string used to build the Azure `EmailClient`. | Required and directly used. |
 | `FROM_EMAIL` | Sender address for outbound email. | Required and directly used. |
 | `BOOKING_URL` | Booking link inserted into the email body. | Required and directly used. |
@@ -481,7 +482,7 @@ The success payload currently returned by the handler is:
 
 There is no explicit `response_model` declaration.
 
-The handler docstring states that the endpoint returns HTTP `202 Accepted`, but the decorator does not explicitly configure `status_code=202`. Treat the code and docstring as an existing inconsistency that must be resolved deliberately before depending on the precise HTTP status.
+The endpoint explicitly configures `status_code=202` since the `ms-notifier-hardening` change. Rate limiting applies per IP and returns `429` with `Retry-After` when exceeded.
 
 ### `GET /api/v1/health`
 
@@ -490,11 +491,15 @@ Response:
 ```json
 {
   "status": "ok",
-  "service": "ms-notifications"
+  "service": "ms-notifier-webhook"
 }
 ```
 
-No authentication or authorization mechanism is declared for either endpoint in the repository.
+### `GET /api/v1/health/ready`
+
+Configuration-only readiness; responds 200 with `{"status": "ready", "checks": {...}}` or 503 with `{"status": "not_ready", "checks": {...}}`. No external calls are made.
+
+No authentication or authorization mechanism is declared for these endpoints in the repository.
 
 ---
 
@@ -539,17 +544,23 @@ There is no persistent write between receiving the lead and sending the email. T
 
 ## 11. Testing
 
-No test files or test suite configuration are present in the tracked repository at the analyzed commit.
+Since the `ms-notifier-hardening` change, the repository has a pytest suite under `tests/` plus a root `conftest.py` that sets dummy environment variables before importing `src` (no real Google/Azure calls).
 
-The repository does contain `.pytest_cache/` and `*.pytest_cache/` ignore patterns, but those patterns alone are not evidence that pytest is configured or that tests exist.
+Configuration lives in `pyproject.toml` (`[tool.pytest.ini_options]`, `asyncio_mode = "auto"`, `testpaths = ["tests"]`) and dev dependencies (`pytest`, `pytest-asyncio`, `ruff`) are declared in `[dependency-groups]`.
 
-There is no pytest dependency in `pyproject.toml`, no test runner configuration, and no CI workflow that executes tests.
+Commands:
+
+```bash
+uv run pytest -q
+uv run ruff check .
+uv run ruff format --check .
+```
+
+CI runs lint, format check and tests on push/PR (`.github/workflows/ci.yml`).
 
 ### Agent rule
 
-Do not claim that a change is covered by existing automated tests unless tests are added or discovered in the repository. For current code, validation must be based on the available project commands and direct verification of the affected behavior.
-
-When adding tests, place them only after confirming the project’s chosen test structure; do not invent a testing convention solely because the project is Python/FastAPI.
+The suite is hermetic: never add tests that call Google Drive or Azure. Use mocks/monkeypatch and dummy env vars.
 
 ---
 
@@ -568,9 +579,9 @@ When adding tests, place them only after confirming the project’s chosen test 
 
 ### Not configured / not evidenced
 
-No repository-specific ESLint/Prettier/Biome equivalent, Ruff configuration, Black configuration, mypy configuration, formatter configuration, Sonar configuration, pre-commit configuration, or explicit commit-message enforcement was found.
+Ruff (lint + format) and pytest are configured since `ms-notifier-hardening` (see §11). There is still no mypy/type-checker, Sonar, pre-commit, or explicit commit-message enforcement.
 
-Do not introduce a mandatory formatter/linter workflow without an explicit project change that establishes it.
+Do not introduce additional mandatory tooling without an explicit project change that establishes it.
 
 ---
 
@@ -583,7 +594,7 @@ The repository declares `uv` as the package-management workflow and contains `uv
 The Dockerfile performs:
 
 ```bash
-uv pip install --system -r pyproject.toml
+uv sync --frozen --no-dev --no-install-project
 ```
 
 ### Runtime
@@ -602,12 +613,8 @@ The Dockerfile exposes port `8000` and runs a single Uvicorn worker.
 
 ### Commands not evidenced
 
-No repository script explicitly documents commands for:
+Tests, lint and formatting commands now exist (see §11). No repository script explicitly documents commands for:
 
-- unit tests
-- integration tests
-- lint
-- formatting
 - type checking
 - local debugging
 - production migrations
@@ -617,7 +624,7 @@ Do not invent these commands in future agent instructions unless they are added 
 
 ### Lockfile nuance
 
-`uv.lock` is copied into the Docker image, but the Dockerfile installs from `pyproject.toml` with `uv pip install --system -r pyproject.toml`. The Dockerfile does not visibly invoke a lock-enforcing install mode. Therefore, do not describe the container build as explicitly reproducing the exact lockfile resolution without first changing/verifying the build process.
+The Dockerfile installs with `uv sync --frozen` from `uv.lock`, so the container reproduces the locked dependency set. `uv lock --check` verifies lock/pyproject consistency.
 
 ---
 
@@ -663,7 +670,7 @@ Lead email validation uses `EmailStr` from Pydantic. The `need` field is require
 
 ### CORS
 
-CORS is permissive in the current configuration because `"*"` is present in `allow_origins` and credentials are enabled. Do not silently change this behavior while editing unrelated code.
+CORS is an explicit allowlist from `CORS_ORIGINS`; there is no wildcard. The landing's production domain must be added to `CORS_ORIGINS` or its preflight will be rejected (400). Behind a proxy, run uvicorn with `--proxy-headers`/`FORWARDED_ALLOW_IPS` so rate limiting sees the real client IP.
 
 ### Authentication / authorization
 
@@ -692,10 +699,15 @@ This document is not a security audit; it records application behavior that is o
 - `src/services/email_service.py` — Azure email contract and attachment construction.
 - `src/models/lead.py` — incoming webhook schema.
 - `src/core/exceptions.py` — controlled service error types.
+- `src/core/retry.py` — retry/backoff helper used by the pipeline.
+- `src/core/rate_limit.py` — slowapi limiter instance.
+- `src/core/logging.py` — logging configuration.
 
 ### IMPORTANT
 
-- `pyproject.toml` — dependency declarations and Python version floor.
+- `pyproject.toml` — dependency declarations, Python version floor, Ruff/pytest config.
+- `conftest.py` and `tests/` — hermetic pytest suite (dummy env vars, no network).
+- `.github/workflows/ci.yml` — CI lint/format/tests on push and PR.
 - `uv.lock` — resolved dependency set.
 - `.env.example` — expected configuration keys and example placeholders.
 - `Dockerfile` — runtime image, installation, port, and Uvicorn invocation.
@@ -837,7 +849,7 @@ src/main.py
 
 9. **Do not add scheduling-provider-specific code for `BOOKING_URL`.** The current application intentionally consumes a generic URL rather than an SDK integration.
 
-10. **When touching email-provider dependencies, inspect historical leftovers.** `aiosmtplib` remains declared but the current implementation uses Azure Communication Services. Do not restore SMTP behavior without explicit requirements and a deliberate dependency/configuration change.
+10. **When touching email-provider dependencies, inspect historical leftovers.** `aiosmtplib` was removed from `pyproject.toml` in `ms-notifier-hardening`; the current implementation uses Azure Communication Services. Do not restore SMTP behavior without explicit requirements and a deliberate dependency/configuration change.
 
 11. **When changing dependency declarations, check `pyproject.toml`, `uv.lock`, and `Dockerfile` together.** The lockfile is present, but the Docker install command currently uses `pyproject.toml` directly.
 
@@ -847,7 +859,7 @@ src/main.py
 
 14. **Preserve public paths unless the change explicitly requires an API change.** Current public application routes are `/api/v1/lead` and `/api/v1/health`.
 
-15. **Review CORS changes carefully.** `main.py` currently allows both localhost frontend access and a wildcard origin while enabling credentials. Any modification should be intentional and tested against the caller’s needs.
+15. **Review CORS changes carefully.** `main.py` uses an explicit allowlist (`CORS_ORIGINS`); the wildcard was removed in `bfd65f3`. Any modification should be intentional and tested against the caller’s needs.
 
 16. **Keep error taxonomy coherent.** Drive failures should remain distinguishable through `DriveDownloadError`; email failures through `EmailDeliveryError`; both inherit from `NotificationServiceError`.
 
@@ -873,33 +885,37 @@ src/main.py
 
 ## 20. Known Limitations / Inconsistencies
 
-### API status mismatch
+### API status mismatch (resolved)
 
-`handle_lead()` is documented as returning `202 Accepted`, but the route decorator does not explicitly configure a 202 response status.
+`handle_lead()` now configures `status_code=202` explicitly (change `ms-notifier-hardening`); the docstring matches the behavior.
 
-### Required-but-unused Azure settings
+### Required-but-unused Azure settings (resolved)
 
-`AZURE_COMMUNICATION_ENDPOINT` and `AZURE_COMMUNICATION_KEY` are mandatory `Settings` fields, but the current `AsyncEmailService` uses `AZURE_EMAIL_CONNECTION_STRING` for client creation and does not directly read the endpoint/key fields.
+`AZURE_COMMUNICATION_ENDPOINT` and `AZURE_COMMUNICATION_KEY` were removed from `Settings` (change `ms-notifier-hardening`); the email service only needs `AZURE_EMAIL_CONNECTION_STRING`. Legacy values in `.env` are ignored (`extra="ignore"`).
 
-### Legacy email dependency declarations
+### Legacy email dependency declarations (resolved)
 
-`aiosmtplib` and `aiohttp` are present in the declared/locked dependency set but no direct application import/reference was found.
+`aiosmtplib`, `aiohttp` and the explicit `azure-core` declaration were removed from `pyproject.toml` (change `ms-notifier-hardening`).
 
-### Lockfile / Docker installation ambiguity
+### Lockfile / Docker installation ambiguity (resolved)
 
-`uv.lock` is copied during the Docker build, but the install step reads `pyproject.toml` directly. The Dockerfile therefore does not visibly enforce the lockfile resolution.
+The Dockerfile now installs with `uv sync --frozen` from `uv.lock` and runs as non-root (`appuser`) with a HEALTHCHECK (change `ms-notifier-hardening`).
 
 ### Booking example drift
 
 `BOOKING_URL` is provider-neutral, while `.env.example` demonstrates a Calendly URL. The current code has no provider-specific booking client and no code-level default booking URL.
 
-### CORS permissiveness
+### Synchronous connection-string parsing (documented, not moved)
 
-The application configures both `"*"` and `allow_credentials=True`. This is an existing behavior and should not be changed accidentally.
+`EmailClient.from_connection_string` is synchronous but performs no network I/O (it only parses the string). It intentionally stays inside the send path to avoid failing at import time; moving it to `__init__` is not required (H17).
 
-### Synchronous credential refresh in async service
+### CORS permissiveness (resolved)
 
-`AsyncDriveService._get_access_token()` performs a synchronous credential refresh within an asynchronous service. This is an existing implementation detail that may matter for latency/concurrency work.
+CORS is an explicit allowlist from `CORS_ORIGINS`; the wildcard was removed in `bfd65f3` and there is no permissive fallback.
+
+### Synchronous credential refresh in async service (resolved)
+
+`_get_access_token()` now refreshes only when `creds.valid` is false, under an `asyncio.Lock`, and off the event loop via `asyncio.to_thread` (change `ms-notifier-hardening`).
 
 ### In-process background processing
 
@@ -909,17 +925,17 @@ The pipeline uses FastAPI `BackgroundTasks`. No durable queue, worker service, r
 
 No database, cache, ORM/ODM, migration layer, or repository abstraction is present.
 
-### No automated test suite
+### No automated test suite (resolved)
 
-No tests or test runner configuration are present in the tracked repository at the analyzed commit.
+A hermetic pytest suite, Ruff configuration and a GitHub Actions CI workflow exist since `ms-notifier-hardening` (see §11).
 
 ### No deployment manifest
 
 The repository contains a Dockerfile and a health endpoint comment referencing Render, but no Render, Kubernetes, Terraform, Pulumi, AWS, Azure infrastructure, or other deployment manifest is present.
 
-### IDE portability issue
+### IDE portability issue (resolved)
 
-Tracked `.idea` metadata contains a user-specific Windows/OneDrive Python SDK path. This should not be treated as a portable environment requirement.
+`.idea/` is no longer tracked and is ignored via `.gitignore` (change `ms-notifier-hardening`).
 
 ---
 
@@ -1129,14 +1145,14 @@ No existe evidencia suficiente en el repositorio para afirmarlo.
 
 At the analyzed `main` commit:
 
-- Application source is concentrated in 12 Python files under `src/` (including package `__init__.py` files).
-- The application is a single FastAPI service with two HTTP routes.
+- Application source is concentrated in 15 Python files under `src/` (including package `__init__.py` files).
+- The application is a single FastAPI service with three HTTP routes.
 - Lead handling is asynchronous only in the sense of FastAPI async/background execution; there is no separate worker service.
 - Google Drive is the source of the attached document.
 - Azure Communication Services Email is the active email provider in current source code.
 - Booking is represented by the configurable `BOOKING_URL` only.
 - There is no visible database or persistence layer.
-- There is no visible automated test suite.
+- There is a hermetic pytest suite and a CI workflow since `ms-notifier-hardening`.
 - There is no visible deployment manifest beyond the Dockerfile.
 - OpenSpec is explicitly configured and repository tooling is committed for several AI-agent environments.
 

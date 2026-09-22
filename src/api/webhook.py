@@ -14,7 +14,6 @@ from src.services.email_service import AsyncEmailService
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
 
 drive_service = AsyncDriveService()
 email_service = AsyncEmailService()

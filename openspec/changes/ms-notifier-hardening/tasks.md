@@ -11,7 +11,7 @@
 - [x] 2.1 Fijar `status_code=202` en `@router.post("/lead")` y corregir el docstring; verificar inspeccionando `app.openapi()` (`responses` del POST incluye `202`) y con el test de contrato de 6.2.
 - [x] 2.2 Unificar el naming a `ms-notifier-webhook` en el título de FastAPI (`src/main.py`) y en el campo `service` de `/health`; verificar con `python -c` sobre `app.title` y con el test de health de 6.2.
 - [x] 2.3 Implementar `GET /api/v1/health/ready` con checks de configuración sin I/O (JSON de Google parseable, `DRIVE_FILE_ID`, connection string, `CORS_ORIGINS` no vacío, `MAX_PDF_SIZE_MB > 0`, `RATE_LIMIT_LEAD` parseable) devolviendo 200 `ready` o 503 `not_ready` con `checks`; verificar que no se llama a Google y con los tests de readiness de 6.2.
-- [ ] 2.4 Documentar la nota de coordinación del frontend externo (`necesidad`→`need`, `PUBLIC_LEAD_ENDPOINT`) en `README.md`; verificar que la nota existe y que no se modificó el repo del frontend.
+- [x] 2.4 Documentar la nota de coordinación del frontend externo (`necesidad`→`need`, `PUBLIC_LEAD_ENDPOINT`) en `README.md`; verificar que la nota existe y que no se modificó el repo del frontend.
 
 ## 3. Grupo B — Resiliencia del pipeline
 
@@ -27,17 +27,17 @@
 - [x] 4.1 Limpiar `Settings`: retirar `AZURE_COMMUNICATION_ENDPOINT`/`AZURE_COMMUNICATION_KEY`, agregar `ALERT_EMAIL`, `RATE_LIMIT_LEAD`, `MAX_PDF_SIZE_MB`, `LOG_LEVEL` y fijar `extra="ignore"`; verificar con el test de 6.2 (app arranca con variables retiradas presentes) y con `.env.example` actualizado (nuevas documentadas, retiradas como legado).
 - [x] 4.2 Añadir rate limiting con `slowapi` a `/lead` (key por IP, límite leído en runtime) con handler de `429` y header `Retry-After`; verificar con el test de 6.4 (exceder límite responde 429 y no agenda pipeline).
 - [x] 4.3 Eximir `/health` y `/health/ready` del límite y comprobar que el límite es configurable (`RATE_LIMIT_LEAD=2/minute` cambia el comportamiento); verificar con los tests de 6.4.
-- [ ] 4.4 Documentar el caveat de IP tras proxy (`--proxy-headers`/`FORWARDED_ALLOW_IPS`) en `README.md` y `AGENTS.md`; verificar que la nota existe.
+- [x] 4.4 Documentar el caveat de IP tras proxy (`--proxy-headers`/`FORWARDED_ALLOW_IPS`) en `README.md` y `AGENTS.md`; verificar que la nota existe.
 
 ## 5. Grupo D — Limpieza y mantenibilidad
 
-- [ ] 5.1 Retirar `aiosmtplib`, `aiohttp` y `azure-core` de `pyproject.toml`; verificar con búsqueda en `src/` que no hay imports y con `uv lock --check` (exit 0).
-- [ ] 5.2 Dockerfile reproducible y seguro: `uv sync --frozen --no-dev` con PATH al venv, usuario no-root `appuser` y `HEALTHCHECK` contra liveness; verificar con `docker build` y `docker run` (proceso no-root, healthcheck healthy) si Docker está disponible; si no, dejar constancia en el reporte.
-- [ ] 5.3 Crear `src/core/logging.py` con `configure_logging()` (lee `LOG_LEVEL`, formato con timestamp/nivel/logger/mensaje) y llamarlo en `src/main.py`; eliminar `basicConfig` de `src/api/webhook.py`; verificar con el test de `LOG_LEVEL=DEBUG` de 6.2.
-- [ ] 5.4 Añadir contexto (lead y fase) a los logs del pipeline sin secretos; verificar con el test de caplog de 6.3.
-- [ ] 5.5 Sacar `.idea/` de git (`git rm -r --cached .idea`) y agregar `.idea/` a `.gitignore`; verificar con `git ls-files .idea` sin resultados.
-- [ ] 5.6 Actualizar `AGENTS.md`: CORS como allowlist `CORS_ORIGINS` (sin wildcard), naming `ms-notifier-webhook`, endpoints (202 y readiness), variables nuevas, comandos de calidad y nota H17 (`from_connection_string` síncrono sin I/O); verificar que no queda `"*"` ni `localhost:4321` hardcodeado como CORS vigente.
-- [ ] 5.7 Crear `README.md` (qué es, requisitos Python 3.14/uv, setup, variables de entorno, comandos de run/tests/lint, Docker y notas de despliegue, decisión de proyecto virtual sin `[build-system]`); verificar siguiendo el README en el entorno actual.
+- [x] 5.1 Retirar `aiosmtplib`, `aiohttp` y `azure-core` de `pyproject.toml`; verificar con búsqueda en `src/` que no hay imports y con `uv lock --check` (exit 0).
+- [x] 5.2 Dockerfile reproducible y seguro: `uv sync --frozen --no-dev` con PATH al venv, usuario no-root `appuser` y `HEALTHCHECK` contra liveness; verificar con `docker build` y `docker run` (proceso no-root, healthcheck healthy) si Docker está disponible; si no, dejar constancia en el reporte.
+- [x] 5.3 Crear `src/core/logging.py` con `configure_logging()` (lee `LOG_LEVEL`, formato con timestamp/nivel/logger/mensaje) y llamarlo en `src/main.py`; eliminar `basicConfig` de `src/api/webhook.py`; verificar con el test de `LOG_LEVEL=DEBUG` de 6.2.
+- [x] 5.4 Añadir contexto (lead y fase) a los logs del pipeline sin secretos; verificar con el test de caplog de 6.3.
+- [x] 5.5 Sacar `.idea/` de git (`git rm -r --cached .idea`) y agregar `.idea/` a `.gitignore`; verificar con `git ls-files .idea` sin resultados.
+- [x] 5.6 Actualizar `AGENTS.md`: CORS como allowlist `CORS_ORIGINS` (sin wildcard), naming `ms-notifier-webhook`, endpoints (202 y readiness), variables nuevas, comandos de calidad y nota H17 (`from_connection_string` síncrono sin I/O); verificar que no queda `"*"` ni `localhost:4321` hardcodeado como CORS vigente.
+- [x] 5.7 Crear `README.md` (qué es, requisitos Python 3.14/uv, setup, variables de entorno, comandos de run/tests/lint, Docker y notas de despliegue, decisión de proyecto virtual sin `[build-system]`); verificar siguiendo el README en el entorno actual.
 
 ## 6. Grupo E — Calidad (tests, lint, CI)
 
