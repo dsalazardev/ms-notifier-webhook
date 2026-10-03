@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
+from starlette.staticfiles import StaticFiles
 
 from src.api.webhook import router as webhook_router
 from src.core.config import settings
@@ -28,3 +29,5 @@ app.add_middleware(
 )
 
 app.include_router(webhook_router, prefix="/api/v1")
+
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
